@@ -1,10 +1,10 @@
-Project : white-vault
-Author : Karrol
-Platform : Android
-Language : Java
-Architecture : MVVM
-Project Type : Android Security / Utility Application
-Date : 10-9-2026
+- Project : white-vault
+- Author : Karrol
+- Platform : Android
+- Language : Java
+- Architecture : MVVM
+- Project Type : Android Security / Utility Application
+- Date : 10-9-2026
 
 
 
