@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.white_vault.app"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.white_vault.app"

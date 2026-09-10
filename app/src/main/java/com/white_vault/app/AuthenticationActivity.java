@@ -1,6 +1,7 @@
 package com.white_vault.app;
 
 import android.os.Bundle;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class AuthenticationActivity extends AppCompatActivity {
+
+    EditText password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +23,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        password = findViewById(R.id.password);
     }
 }
