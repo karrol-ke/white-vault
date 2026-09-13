@@ -9,11 +9,11 @@ public class Password {
     @PrimaryKey
     @NonNull
 
-    public String index;
+    public String identifier;
     public String value;
 
-    public Password(@NonNull String index, String value){
-        this.index = index;
+    public Password(@NonNull String identifier, String value){
+        this.identifier = identifier;
         this.value = value;
     }
 }

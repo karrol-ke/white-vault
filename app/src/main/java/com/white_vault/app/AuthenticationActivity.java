@@ -12,6 +12,9 @@ import androidx.core.view.WindowInsetsCompat;
 public class AuthenticationActivity extends AppCompatActivity {
 
     EditText password;
+    Cryptographic cryptographic = new Cryptographic();
+    DataBaseManager dataBaseManager = new DataBaseManager();
+    String KEY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,5 +28,10 @@ public class AuthenticationActivity extends AppCompatActivity {
         });
 
         password = findViewById(R.id.password);
+
+        KEY = cryptographic.hashPassword(password.getText().toString());
+
+
+
     }
 }

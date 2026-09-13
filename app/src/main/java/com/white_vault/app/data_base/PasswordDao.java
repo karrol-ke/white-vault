@@ -10,6 +10,6 @@ public interface PasswordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Password password);
 
-    @Query("SELECT value FROM passwords WHERE `index` = :index LIMIT 1")
-    String getValue(String index);
+    @Query("SELECT value FROM passwords WHERE `identifier` = :identifier LIMIT 1")
+    String getValue(String identifier);
 }

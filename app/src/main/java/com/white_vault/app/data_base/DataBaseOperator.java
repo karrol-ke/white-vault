@@ -1,6 +1,7 @@
 package com.white_vault.app.data_base;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import androidx.room.Room;
 
@@ -26,12 +27,7 @@ public class DataBaseOperator {
             ).openHelperFactory(factory).build();
 
         }
-
+        Toast.makeText(context, "Database Created!", Toast.LENGTH_SHORT).show();
         return dataBase;
-    }
-
-    public static boolean FileExists(Context context){
-        File databaseFile = context.getDatabasePath("white_vault.db");
-        return databaseFile.exists();
     }
 }

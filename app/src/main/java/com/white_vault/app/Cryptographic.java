@@ -9,13 +9,13 @@ public class Cryptographic {
     /**
      * Hashes an input string using SHA-256 and returns a hex string.
      *
-     * @param str The string to hash
+     * @param password The string to hash
      * @return The 64-character hexadecimal SHA-256 hash
      */
-    public static String hashPassword(String str) {
+    public String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] encoded_hash = digest.digest(str.getBytes(StandardCharsets.UTF_8));
+            byte[] encoded_hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
             StringBuilder hexString = new StringBuilder(2 * encoded_hash.length);
             for (byte b : encoded_hash) {
