@@ -143,9 +143,19 @@ Technical Implementation
         |    |    |- main/
         |    |        |- java/
         |    |        |    |- com.white_vault.app/
+        |    |        |        |- data_base/
+        |    |        |             - DataBase.java
+        |    |        |             - DataBaseOperator.java
+        |    |        |             - Document.java
+        |    |        |             - DocumentDao.java
+        |    |        |             - Password.java
+        |    |        |             - PasswordDao.java
         |    |        |        - MainActivity.java
         |    |        |        - Cryptographic.java
         |    |        |        - AuthenticationActivity.java
+        |    |        |        - DataBaseManager.java
+        |    |        |        - JsonHandler.java
+        |    |        |        - UserActivity.java
         |    |        |
         |    |        |-res/
         |    |        |    |- drawable/
@@ -154,6 +164,7 @@ Technical Implementation
         |    |        |    |- layout/
         |    |        |    |    - activity_main.xml
         |    |        |    |    - activity_authentication.xml
+        |    |        |    |    - activity_user.xml
         |    |        |    |
         |    |        |    |- mipmap/
         |    |        |    |- values/
