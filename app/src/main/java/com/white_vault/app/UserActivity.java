@@ -44,9 +44,12 @@ public class UserActivity extends AppCompatActivity {
                 user_password = text_user_password.getText().toString();
                 // Hashing Password
                 hashed_key = cryptographic.hashPassword(user_password);
-                dataBaseManager.openDatabase(UserActivity.this, hashed_key);
+                dataBaseManager.createDatabase(UserActivity.this, hashed_key);
+                // Saving user info
                 jsonHandler.dumpValue(UserActivity.this, "user_info.json", "user_name", user_name);
-                intent = new Intent(UserActivity.this, MainActivity.class);
+                // Closing Database
+                dataBaseManager.closeDataBase();
+                intent = new Intent(UserActivity.this, AuthenticationActivity.class);
                 startActivity(intent);
                 finish();
             }

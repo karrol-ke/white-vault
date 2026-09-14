@@ -1,7 +1,11 @@
 package com.white_vault.app;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,9 +15,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class AuthenticationActivity extends AppCompatActivity {
 
-    EditText password;
+    EditText text_password;
+    Button button_login;
     Cryptographic cryptographic = new Cryptographic();
     DataBaseManager dataBaseManager = new DataBaseManager();
+    JsonHandler jsonHandler = new JsonHandler();
+    Intent intent;
     String KEY;
 
     @Override
@@ -27,11 +34,28 @@ public class AuthenticationActivity extends AppCompatActivity {
             return insets;
         });
 
-        password = findViewById(R.id.password);
+        text_password = findViewById(R.id.text_password);
+        button_login = findViewById(R.id.button_login);
 
-        KEY = cryptographic.hashPassword(password.getText().toString());
+        if (!jsonHandler.fileExists(this, "user_info.json")){
+            Toast.makeText(this, "DataBase not found!, Let's create a new one.", Toast.LENGTH_LONG).show();
+            intent = new Intent(AuthenticationActivity.this, UserActivity.class);
+            startActivity(intent);
+        }
 
-
+        button_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                KEY = cryptographic.hashPassword(text_password.getText().toString());
+                if (dataBaseManager.authenticateDatabase(AuthenticationActivity.this, KEY)){
+                    intent = new Intent (AuthenticationActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Toast.makeText(AuthenticationActivity.this, "Password incorrect", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
     }
 }

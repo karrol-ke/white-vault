@@ -1,6 +1,5 @@
 package com.white_vault.app;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -13,9 +12,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    Intent intent;
-    JsonHandler jsonHandler = new JsonHandler();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,23 +22,5 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        try {
-            startUp();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void startUp() throws Exception {
-        if (jsonHandler.fileExists(this, "user_info.json")){
-
-            intent = new Intent(MainActivity.this, AuthenticationActivity.class);
-            startActivity(intent);
-
-        }else {
-            Toast.makeText(this, "DataBase not found!, Let's create a new one.", Toast.LENGTH_LONG).show();
-            intent = new Intent(MainActivity.this, UserActivity.class);
-            startActivity(intent);
-        }
     }
 }

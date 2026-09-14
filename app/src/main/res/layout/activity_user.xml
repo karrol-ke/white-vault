@@ -33,7 +33,7 @@
             android:layout_height="70dp"
             android:layout_marginTop="10dp"
             android:hint="User Name"
-            android:textColorHint="@color/black"
+            android:textColorHint="#9D9D9D"
             android:textColor="@color/black"
             android:backgroundTint="@color/black"
             android:padding="7dp"/>
@@ -44,7 +44,7 @@
             android:layout_height="70dp"
             android:layout_marginTop="10dp"
             android:hint="Password"
-            android:textColorHint="@color/black"
+            android:textColorHint="#9D9D9D"
             android:textColor="@color/black"
             android:backgroundTint="@color/black"
             android:padding="7dp"/>

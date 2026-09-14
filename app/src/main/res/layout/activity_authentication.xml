@@ -19,23 +19,37 @@
             android:layout_marginTop="40dp">
 
             <ImageView
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:src="@drawable/logo"
                 android:layout_centerHorizontal="true"/>
 
         </RelativeLayout>
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/text_password"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:hint="Enter Password"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/black"
             android:textColorHint="#9D9D9D"
             android:padding="20dp"/>
+
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:text="Log In"
+            android:textSize="25dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/black"/>
 
     </LinearLayout>
 

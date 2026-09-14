@@ -16,11 +16,22 @@ public class DataBaseManager {
     public DataBase db;
     private final ExecutorService databaseExecutor = Executors.newSingleThreadExecutor();
 
-    public void openDatabase(Context context, String key){
-        try{
-            db = DataBaseOperator.loadDataBase(context, key);
-        } catch (Exception e) {
-            Toast.makeText(context, "Error on Opening Database", Toast.LENGTH_SHORT).show();
+    public void createDatabase(Context context, String key){
+        boolean created = DataBaseOperator.createDatabase(context, key);
+        if (created) {
+            Toast.makeText(context, "Database created!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public boolean authenticateDatabase(Context context, String key){
+        boolean success = DataBaseOperator.authenticate(context, key);
+
+        if (success) {
+            db = DataBaseOperator.getDatabase();
+            Toast.makeText(context, "Database opened!", Toast.LENGTH_SHORT).show();
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -61,9 +72,7 @@ public class DataBaseManager {
     }
 
     public void closeDataBase() {
-        if (db != null && db.isOpen()) {
-            db.close();
-        }
+        DataBaseOperator.closeDatabase();
     }
 
 }
