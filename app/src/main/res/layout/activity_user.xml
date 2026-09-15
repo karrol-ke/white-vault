@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserActivity"
-    android:background="@color/white">
+    android:background="@drawable/user_background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -35,8 +35,8 @@
             android:hint="User Name"
             android:textColorHint="#9D9D9D"
             android:textColor="@color/black"
-            android:backgroundTint="@color/black"
-            android:padding="7dp"/>
+            android:background="@drawable/user_edit_text_background"
+            android:padding="20dp"/>
 
         <EditText
             android:id="@+id/user_password"
@@ -46,8 +46,8 @@
             android:hint="Password"
             android:textColorHint="#9D9D9D"
             android:textColor="@color/black"
-            android:backgroundTint="@color/black"
-            android:padding="7dp"/>
+            android:background="@drawable/user_edit_text_background"
+            android:padding="20dp"/>
         
         <Button
             android:id="@+id/button_create_database"
