@@ -8,8 +8,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.card.MaterialCardView;
+
 
 public class MainActivity extends AppCompatActivity {
+
+    MaterialCardView card_password, card_document;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,5 +25,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
     }
 }

@@ -46,7 +46,7 @@ public class UserActivity extends AppCompatActivity {
                 hashed_key = cryptographic.hashPassword(user_password);
                 dataBaseManager.createDatabase(UserActivity.this, hashed_key);
                 // Saving user info
-                jsonHandler.dumpValue(UserActivity.this, "user_info.json", "user_name", user_name);
+                jsonHandler.dumpValue(UserActivity.this, "app_data.json", "user_info", "user_name", user_name);
                 // Closing Database
                 dataBaseManager.closeDataBase();
                 intent = new Intent(UserActivity.this, AuthenticationActivity.class);
