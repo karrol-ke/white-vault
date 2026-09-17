@@ -156,6 +156,7 @@ Technical Implementation
         |    |        |        - DataBaseManager.java
         |    |        |        - JsonHandler.java
         |    |        |        - UserActivity.java
+        |    |        |        - PasswordActivity.java
         |    |        |
         |    |        |-res/
         |    |        |    |- drawable/
@@ -165,6 +166,7 @@ Technical Implementation
         |    |        |    |    - activity_main.xml
         |    |        |    |    - activity_authentication.xml
         |    |        |    |    - activity_user.xml
+        |    |        |    |    - activity_password.xml
         |    |        |    |
         |    |        |    |- mipmap/
         |    |        |    |- values/
