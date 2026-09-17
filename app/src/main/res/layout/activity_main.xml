@@ -166,7 +166,7 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:src="@drawable/icon_document"
+                        android:src="@drawable/icon_folder"
                         app:tint="@color/primary" />
 
                     <TextView

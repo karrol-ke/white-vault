@@ -16,6 +16,10 @@ public class DataBaseManager {
     public DataBase db;
     private final ExecutorService databaseExecutor = Executors.newSingleThreadExecutor();
 
+    public DataBase getDatabase() {
+        return db;
+    }
+
     public void createDatabase(Context context, String key){
         boolean created = DataBaseOperator.createDatabase(context, key);
         if (created) {
@@ -44,8 +48,7 @@ public class DataBaseManager {
     }
     public void fetchPassword(String identifier, PasswordCallback callback){
         databaseExecutor.execute(() -> {
-            String result = db.passwordDao().getValue(identifier);
-            callback.onResult(result);
+            Password result = db.passwordDao().getPassword(identifier);
         });
     }
 
@@ -57,9 +60,9 @@ public class DataBaseManager {
             callback.onResult(data_one, data_two);
         });
     }
-    public void insertPassword(String identifier, String value){
+    public void insertPassword(String identifier, String service_name, String value, String date, String description){
         databaseExecutor.execute(() -> {
-            Password password = new Password(identifier, value);
+            Password password = new Password(identifier, service_name, value, date, description);
             db.passwordDao().insert(password);
         });
     }
