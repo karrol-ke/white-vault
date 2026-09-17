@@ -1,6 +1,8 @@
 package com.white_vault.app;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import com.google.android.material.card.MaterialCardView;
 public class MainActivity extends AppCompatActivity {
 
     MaterialCardView card_password, card_document;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,16 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        card_password = findViewById(R.id.card_password);
+        card_document = findViewById(R.id.card_document);
+
+        card_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(MainActivity.this, PasswordActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
