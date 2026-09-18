@@ -14,8 +14,6 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.google.android.material.card.MaterialCardView;
-import com.white_vault.app.data_base.DataBase;
-import com.white_vault.app.data_base.DataBaseOperator;
 
 import org.jetbrains.annotations.NotNull;
 
