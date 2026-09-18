@@ -19,7 +19,6 @@ public class AuthenticationActivity extends AppCompatActivity {
     Button button_login;
     Cryptographic cryptographic = new Cryptographic();
     DataBaseManager dataBaseManager = new DataBaseManager();
-    JsonHandler jsonHandler = new JsonHandler();
     Intent intent;
     String KEY;
 
@@ -37,7 +36,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         text_password = findViewById(R.id.text_password);
         button_login = findViewById(R.id.button_login);
 
-        if (!jsonHandler.fileExists(this, "app_data.json")){
+        if (!JsonHandler.fileExists(this, "app_data.json")){
             Toast.makeText(this, "DataBase not found!, Let's create a new one.", Toast.LENGTH_LONG).show();
             intent = new Intent(AuthenticationActivity.this, UserActivity.class);
             startActivity(intent);

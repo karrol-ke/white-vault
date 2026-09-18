@@ -9,14 +9,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.google.android.material.card.MaterialCardView;
+import com.white_vault.app.data_base.DataBase;
+import com.white_vault.app.data_base.DataBaseOperator;
+
+import org.jetbrains.annotations.NotNull;
 
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements DefaultLifecycleObserver {
+    DataBaseManager dataBaseManager = new DataBaseManager();
     MaterialCardView card_password, card_document;
     Intent intent;
+    String user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        user_name =
+
         card_password = findViewById(R.id.card_password);
         card_document = findViewById(R.id.card_document);
 
@@ -40,5 +49,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onStop(@NotNull LifecycleOwner owner){
+        dataBaseManager.closeDataBase();
     }
 }

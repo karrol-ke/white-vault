@@ -39,7 +39,7 @@ public class Cryptographic {
         }
     }
 
-    public static String encrypt(String text, String key) {
+    public String encrypt(String text, String key) {
 
         try {
             byte[] keyBytes = key.getBytes(StandardCharsets.UTF_8);
@@ -57,7 +57,7 @@ public class Cryptographic {
             return null;
         }
     }
-    public static String decrypt(String encryptedText, String key) {
+    public String decrypt(String encryptedText, String key) {
 
         try {
             byte[] keyBytes = key.getBytes(StandardCharsets.UTF_8);

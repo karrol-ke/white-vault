@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 public class JsonHandler {
 
-    public String getValue(Context context, String fileName, String parentKey, String key){
+    public static String getValue(Context context, String fileName, String parentKey, String key){
         try {
             File file = new File(context.getFilesDir(), fileName);
 
@@ -45,7 +45,7 @@ public class JsonHandler {
             throw new RuntimeException(e);
         }
     }
-    public void dumpValue(Context context, String fileName, String parentKey, String key, String value) {
+    public static void dumpValue(Context context, String fileName, String parentKey, String key, String value) {
         File file = new File(context.getFilesDir(), fileName);
 
         try {
@@ -90,7 +90,7 @@ public class JsonHandler {
         }
     }
 
-    public boolean fileExists(Context context, String file_name) {
+    public static boolean fileExists(Context context, String file_name) {
 
         File file = new File(context.getFilesDir(), file_name);
 

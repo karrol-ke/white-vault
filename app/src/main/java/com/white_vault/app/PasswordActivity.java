@@ -34,7 +34,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class PasswordActivity extends AppCompatActivity {
-    Cryptographic cryptographic = new Cryptographic();
     private final ExecutorService databaseExecutor = Executors.newSingleThreadExecutor();
     LinearLayout container;
     ImageButton button_add;
@@ -100,9 +99,9 @@ public class PasswordActivity extends AppCompatActivity {
 
                             databaseExecutor.execute(() -> {
                                 db.passwordDao().insert(new Password(
-                                                service,
                                                 identifier,
-                                                cryptographic.hashPassword(new_password.getText().toString()),
+                                                service,
+                                                new_password.getText().toString(),
                                                 date,
                                                 description
                                         )
@@ -118,7 +117,7 @@ public class PasswordActivity extends AppCompatActivity {
         });
     }
 
-    public void addCard(LinearLayout container, int iconResId, String service_name, String id, String date) {
+    public void addCard(LinearLayout container, int iconResId,String id, String service_name, String date) {
 
         Context context = this;
 
@@ -163,21 +162,21 @@ public class PasswordActivity extends AppCompatActivity {
         textLayout.setOrientation(LinearLayout.VERTICAL);
 
 
-        TextView serviceView = new TextView(context);
-
-        serviceView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        serviceView.setText(service_name);
-        serviceView.setTextColor(Color.parseColor("#F5F5F5"));
-        serviceView.setTextSize(15);
-        serviceView.setTypeface(serviceView.getTypeface(), android.graphics.Typeface.BOLD);
-
-
         TextView idView = new TextView(context);
 
         idView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         idView.setText(id);
-        idView.setTextColor(Color.parseColor("#A1A1AA"));
-        idView.setTextSize(12);
+        idView.setTextColor(Color.parseColor("#F5F5F5"));
+        idView.setTextSize(15);
+        idView.setTypeface(idView.getTypeface(), android.graphics.Typeface.BOLD);
+
+
+        TextView serviceView = new TextView(context);
+
+        serviceView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        serviceView.setText(service_name);
+        serviceView.setTextColor(Color.parseColor("#A1A1AA"));
+        serviceView.setTextSize(12);
 
 
         TextView dateView = new TextView(context);
@@ -187,8 +186,8 @@ public class PasswordActivity extends AppCompatActivity {
         dateView.setTextColor(Color.parseColor("#71717A"));
         dateView.setTextSize(11);
 
-        textLayout.addView(serviceView);
         textLayout.addView(idView);
+        textLayout.addView(serviceView);
 
         mainLayout.addView(icon);
         mainLayout.addView(textLayout);
@@ -212,19 +211,9 @@ public class PasswordActivity extends AppCompatActivity {
 
     private void showPasswordDetails(Password password) {
 
-        LinearLayout layout =
-                new LinearLayout(this);
-
-        layout.setOrientation(
-                LinearLayout.VERTICAL
-        );
-
-        layout.setPadding(
-                dpToPx(this, 20),
-                0,
-                dpToPx(this, 20),
-                0
-        );
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(dpToPx(this, 20), 0, dpToPx(this, 20), 0);
 
         TextView serviceView = new TextView(this);
         serviceView.setText("Service: " + password.service);
@@ -234,6 +223,8 @@ public class PasswordActivity extends AppCompatActivity {
 
         TextView passwordView = new TextView(this);
         passwordView.setText("Password: " + password.value);
+        passwordView.setTextIsSelectable(true);
+        passwordView.setTextColor(Color.WHITE);
 
         TextView dateView = new TextView(this);
         dateView.setText("Date: " + password.date);
@@ -254,11 +245,15 @@ public class PasswordActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void fetchPasswordDetails(String service) {
-        DataBase db = DataBaseOperator.getDatabase();
+    private void fetchPasswordDetails(String identifier) {
+
         databaseExecutor.execute(() -> {
-            Password password = db.passwordDao().getPassword(service);
+
+            Password password =
+                    db.passwordDao().getPassword(identifier);
+
             runOnUiThread(() -> {
+
                 if (password != null) {
                     showPasswordDetails(password);
                 }
@@ -280,8 +275,8 @@ public class PasswordActivity extends AppCompatActivity {
                     addCard(
                             container,
                             R.drawable.icon_key,
-                            password.service,
                             password.identifier,
+                            password.service,
                             password.date
                     );
                 }
