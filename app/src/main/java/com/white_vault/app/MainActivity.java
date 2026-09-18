@@ -52,6 +52,13 @@ public class MainActivity extends AppCompatActivity implements DefaultLifecycleO
             }
         });
 
+        card_document.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(MainActivity.this, DocumentActivity.class);
+            }
+        });
+
     }
 
     @Override

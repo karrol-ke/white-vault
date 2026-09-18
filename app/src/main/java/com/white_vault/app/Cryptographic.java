@@ -1,16 +1,18 @@
 package com.white_vault.app;
 
+import android.net.Uri;
 import android.util.Base64;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
 
-
-public class Cryptographic {
+public class Cryptographic extends AppCompatActivity {
     /**
      * Hashes an input string using SHA-256 and returns a hex string.
      *
@@ -37,42 +39,22 @@ public class Cryptographic {
         }
     }
 
-    public String encrypt(String text, String key) {
+    private String encodeFile(Uri uri) throws Exception {
 
-        try {
-            byte[] keyBytes = key.getBytes(StandardCharsets.UTF_8);
+        try (InputStream inputStream = getContentResolver().openInputStream(uri);
+             ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+            if (inputStream == null) {
+                return null;
+            }
 
-            SecretKeySpec secretKey = new SecretKeySpec(keyBytes, "AES");
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            byte[] buffer = new byte[8192];
+            int length;
 
-            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-            byte[] encrypted = cipher.doFinal(text.getBytes(StandardCharsets.UTF_8));
+            while ((length = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, length);
+            }
 
-            return Base64.encodeToString(encrypted, Base64.NO_WRAP);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-    public String decrypt(String encryptedText, String key) {
-
-        try {
-            byte[] keyBytes = key.getBytes(StandardCharsets.UTF_8);
-
-            SecretKeySpec secretKey = new SecretKeySpec(keyBytes, "AES");
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-
-            cipher.init(Cipher.DECRYPT_MODE, secretKey);
-
-            byte[] encrypted = Base64.decode(encryptedText, Base64.NO_WRAP);
-            byte[] decrypted = cipher.doFinal(encrypted);
-
-            return new String(decrypted, StandardCharsets.UTF_8);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            return Base64.encodeToString(outputStream.toByteArray(), Base64.NO_WRAP);
         }
     }
 
