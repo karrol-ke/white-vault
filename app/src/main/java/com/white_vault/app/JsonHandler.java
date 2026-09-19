@@ -19,7 +19,6 @@ public class JsonHandler {
             }
 
             try (FileInputStream input = new FileInputStream(file)) {
-
                 byte[] data = new byte[(int) file.length()];
                 int length = input.read(data);
 
@@ -91,9 +90,7 @@ public class JsonHandler {
     }
 
     public static boolean fileExists(Context context, String file_name) {
-
         File file = new File(context.getFilesDir(), file_name);
-
         return file.exists();
     }
 

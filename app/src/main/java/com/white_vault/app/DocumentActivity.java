@@ -7,13 +7,13 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +43,7 @@ public class DocumentActivity extends AppCompatActivity {
     private final ExecutorService databaseExecutor = Executors.newSingleThreadExecutor();
     Cryptographic cryptographic = new Cryptographic();
     ImageButton button_add;
+    ProgressBar progress_bar;
     private LinearLayout container;
     private DataBase db;
     private String pendingIdentifier;
@@ -63,11 +64,12 @@ public class DocumentActivity extends AppCompatActivity {
 
         container = findViewById(R.id.document_view);
         button_add = findViewById(R.id.button_add);
+        progress_bar = findViewById(R.id.progress_bar);
 
         db = DataBaseOperator.getDatabase();
 
         if (db == null) {
-            Log.e("DOCUMENT", "Database is null");
+            Toast.makeText(this, "Database is null", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -81,7 +83,6 @@ public class DocumentActivity extends AppCompatActivity {
         );
 
         loadDocuments();
-
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -300,15 +301,14 @@ public class DocumentActivity extends AppCompatActivity {
     }
 
     private void loadDocuments() {
-
         if (db == null) {
+            progress_bar.setVisibility(View.INVISIBLE);
             return;
         }
 
         databaseExecutor.execute(() -> {
             List<Document> documents = db.documentDao().getAllDocuments();
             runOnUiThread(() -> {
-
                 container.removeAllViews();
                 for (Document document : documents) {
                     addCard(
@@ -319,6 +319,7 @@ public class DocumentActivity extends AppCompatActivity {
                             document.description
                     );
                 }
+                progress_bar.setVisibility(View.INVISIBLE);
             });
         });
     }

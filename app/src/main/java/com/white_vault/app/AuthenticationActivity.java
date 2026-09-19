@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,6 +18,7 @@ public class AuthenticationActivity extends AppCompatActivity {
 
     EditText text_password;
     Button button_login;
+    ProgressBar progress_bar;
     Cryptographic cryptographic = new Cryptographic();
     DataBaseManager dataBaseManager = new DataBaseManager();
     Intent intent;
@@ -35,6 +37,7 @@ public class AuthenticationActivity extends AppCompatActivity {
 
         text_password = findViewById(R.id.text_password);
         button_login = findViewById(R.id.button_login);
+        progress_bar = findViewById(R.id.progress_bar);
 
         if (!JsonHandler.fileExists(this, "app_data.json")){
             Toast.makeText(this, "DataBase not found!, Let's create a new one.", Toast.LENGTH_LONG).show();
@@ -45,14 +48,20 @@ public class AuthenticationActivity extends AppCompatActivity {
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                KEY = cryptographic.hashPassword(text_password.getText().toString());
-                if (dataBaseManager.authenticateDatabase(AuthenticationActivity.this, KEY)){
-                    intent = new Intent (AuthenticationActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else {
-                    Toast.makeText(AuthenticationActivity.this, "Password incorrect", Toast.LENGTH_SHORT).show();
-                }
+                button_login.setVisibility(View.INVISIBLE);
+                progress_bar.setVisibility(View.VISIBLE);
+                progress_bar.post(() -> {
+                    KEY = cryptographic.hashPassword(text_password.getText().toString());
+                    if (dataBaseManager.authenticateDatabase(AuthenticationActivity.this, KEY)){
+                        intent = new Intent (AuthenticationActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else {
+                        button_login.setVisibility(View.VISIBLE);
+                        progress_bar.setVisibility(View.INVISIBLE);
+                        Toast.makeText(AuthenticationActivity.this, "Password incorrect", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

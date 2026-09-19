@@ -1,18 +1,12 @@
 package com.white_vault.app;
 
 import android.content.Context;
-
 import android.widget.Toast;
-
 import com.white_vault.app.data_base.DataBase;
 import com.white_vault.app.data_base.DataBaseOperator;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 public class DataBaseManager {
     public DataBase db;
-    private final ExecutorService databaseExecutor = Executors.newSingleThreadExecutor();
     public void createDatabase(Context context, String key){
         boolean created = DataBaseOperator.createDatabase(context, key);
         if (created) {
