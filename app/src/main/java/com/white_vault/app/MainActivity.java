@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements DefaultLifecycleO
             @Override
             public void onClick(View view) {
                 intent = new Intent(MainActivity.this, DocumentActivity.class);
+                startActivity(intent);
             }
         });
 

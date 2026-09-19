@@ -4,18 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "document")
+@Entity(tableName = "documents")
 public class Document {
     @PrimaryKey
     @NonNull
 
     public String identifier;
-    public String data_one;
-    public String data_two;
+    public String data;
+    public String date;
+    public String description;
 
-    public Document(@NonNull String identifier, String data_one, String data_two){
+    public Document(@NonNull String identifier, String data, String date, String description){
         this.identifier = identifier;
-        this.data_one = data_one;
-        this.data_two = data_two;
+        this.data = data;
+        this.date = date;
+        this.description = description;
     }
 }
