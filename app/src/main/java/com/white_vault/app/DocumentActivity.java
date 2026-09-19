@@ -274,7 +274,7 @@ public class DocumentActivity extends AppCompatActivity {
         descriptionView.setTextSize(16);
 
         TextView dataView = new TextView(this);
-        dataView.setText("Base64 size: " + document.data.length() + " characters");
+        dataView.setText("Decode size: " + document.data.length() + " characters");
         dataView.setTextColor(Color.parseColor("#A1A1AA"));
         dataView.setTextSize(13);
 
