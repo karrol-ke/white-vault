@@ -17,4 +17,7 @@ public interface PasswordDao {
 
     @Query("SELECT * FROM passwords")
     List<Password> getAllPasswords();
+
+    @Query("DELETE FROM passwords WHERE identifier = :identifier")
+    void deletePassword(String identifier);
 }

@@ -97,7 +97,7 @@ public class DocumentActivity extends AppCompatActivity {
         layout.setPadding(dpToPx(this, 40), 0, dpToPx(this, 40), 0);
 
         EditText newIdentifier = new EditText(this);
-        newIdentifier.setHint("Document Name / Identifier");
+        newIdentifier.setHint("Document Name");
 
         EditText newDescription = new EditText(this);
         newDescription.setHint("Description");
@@ -287,8 +287,15 @@ public class DocumentActivity extends AppCompatActivity {
                     intent = new Intent(DocumentActivity.this, DocumentViewActivity.class);
                     intent.putExtra("id", document.identifier);
                     startActivity(intent);
+                }).setNegativeButton("Delete", (dialog, which) -> {
 
-        }).show();
+                    new AlertDialog.Builder(this).setTitle("Delete Document")
+                            .setMessage("Are you sure you want to delete this document ?")
+                            .setPositiveButton("Delete", (d, w) -> {
+                                deleteDocument(document.identifier);
+                            }).setNegativeButton("Cancel", null).show();
+
+                }).show();
 
     }
 
@@ -319,5 +326,15 @@ public class DocumentActivity extends AppCompatActivity {
     //dp -> px
     private int dpToPx(Context context, int dp) {
         return (int) (dp * context.getResources().getDisplayMetrics().density + 0.5f);
+    }
+
+    private void deleteDocument(String identifier) {
+        databaseExecutor.execute(() -> {
+            db.documentDao().deleteDocument(identifier);
+            runOnUiThread(() -> {
+                loadDocuments();
+                Toast.makeText(DocumentActivity.this, "Document deleted", Toast.LENGTH_SHORT).show();
+            });
+        });
     }
 }

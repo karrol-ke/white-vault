@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -97,15 +98,8 @@ public class PasswordActivity extends AppCompatActivity {
                                 date = "";
                             }
 
-                            databaseExecutor.execute(() -> {
-                                db.passwordDao().insert(new Password(
-                                                identifier,
-                                                service,
-                                                new_password.getText().toString(),
-                                                date,
-                                                description
-                                        )
-                                );
+                            databaseExecutor.execute(() -> {db.passwordDao().insert(new Password(
+                                    identifier, service, new_password.getText().toString(), date, description));
                                 runOnUiThread(() -> {
                                     loadPasswords();
                                 });
@@ -242,20 +236,27 @@ public class PasswordActivity extends AppCompatActivity {
                 .setTitle("Password Details")
                 .setView(layout)
                 .setPositiveButton("Close", null)
-                .show();
+                .setNegativeButton("Delete", (dialog, which) -> {
+
+                    new AlertDialog.Builder(this)
+                            .setTitle("Delete Password")
+                            .setMessage("Are you sure you want to delete this password?")
+                            .setPositiveButton("Delete", (d, w) -> {
+                                deletePassword(password.identifier);
+                            })
+                            .setNegativeButton("Cancel", null).show();
+                }).show();
     }
 
     private void fetchPasswordDetails(String identifier) {
 
         databaseExecutor.execute(() -> {
-
-            Password password =
-                    db.passwordDao().getPassword(identifier);
-
+            Password password = db.passwordDao().getPassword(identifier);
             runOnUiThread(() -> {
-
                 if (password != null) {
                     showPasswordDetails(password);
+                }else {
+                    Toast.makeText(this, "Unable to fetch password details !", Toast.LENGTH_SHORT).show();
                 }
             });
         });
@@ -264,10 +265,7 @@ public class PasswordActivity extends AppCompatActivity {
     private void loadPasswords() {
 
         databaseExecutor.execute(() -> {
-
-            List<Password> passwords =
-                    db.passwordDao().getAllPasswords();
-
+            List<Password> passwords = db.passwordDao().getAllPasswords();
             runOnUiThread(() -> {
                 container.removeAllViews();
 
@@ -280,6 +278,16 @@ public class PasswordActivity extends AppCompatActivity {
                             password.date
                     );
                 }
+            });
+        });
+    }
+
+    private void deletePassword(String identifier) {
+        databaseExecutor.execute(() -> {
+            db.passwordDao().deletePassword(identifier);
+            runOnUiThread(() -> {
+                loadPasswords();
+                Toast.makeText(PasswordActivity.this, "Password deleted", Toast.LENGTH_SHORT).show();
             });
         });
     }

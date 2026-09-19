@@ -17,4 +17,7 @@ public interface DocumentDao {
 
     @Query("SELECT * FROM documents")
     List<Document> getAllDocuments();
+
+    @Query("DELETE FROM documents WHERE identifier = :identifier")
+    void deleteDocument(String identifier);
 }
