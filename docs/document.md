@@ -154,6 +154,8 @@ Technical Implementation
         |    |        |        - Cryptographic.java
         |    |        |        - AuthenticationActivity.java
         |    |        |        - DataBaseManager.java
+        |    |        |        - DocumentActivity.java
+        |    |        |        - DocumentViewActivity.java
         |    |        |        - JsonHandler.java
         |    |        |        - UserActivity.java
         |    |        |        - PasswordActivity.java
@@ -161,11 +163,14 @@ Technical Implementation
         |    |        |-res/
         |    |        |    |- drawable/
         |    |        |    |    - logo.png
+        |    |        |    |    - security_shild.png
         |    |        |    |
         |    |        |    |- layout/
         |    |        |    |    - activity_main.xml
         |    |        |    |    - activity_authentication.xml
         |    |        |    |    - activity_user.xml
+        |    |        |    |    - activity_document.xml
+        |    |        |    |    - activity_document_view.xml
         |    |        |    |    - activity_password.xml
         |    |        |    |
         |    |        |    |- mipmap/
