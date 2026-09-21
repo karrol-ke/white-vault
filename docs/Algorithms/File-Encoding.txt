@@ -1,0 +1,28 @@
+Algorithm: File Encoding using Base64
+=====================================
+
+Input: Selected file
+Output: Base64-encoded string
+
+1. Start
+
+2. Receive the `Uri` of the file selected by the user.
+
+3. Obtain the application's `ContentResolver` using the provided `Context`.
+
+4. Open an `InputStream` for the selected file.
+
+5. Create a `ByteArrayOutputStream` to temporarily store the file data.
+
+6. Create a byte buffer of size 8192 bytes.
+
+7. Read the file from the `InputStream` into the buffer repeatedly until the end of the file is reached.
+
+8. Write each block of bytes into the `ByteArrayOutputStream`.
+
+9. Convert the complete file byte array into a Base64-encoded string using `Base64.NO_WRAP`.
+
+10. Return the Base64-encoded string.
+
+11. Stop
+

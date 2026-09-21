@@ -1,0 +1,23 @@
+Algorithm: File Decoding from Base64
+====================================
+
+Input: Base64-encoded file string
+Output: Decoded temporary file
+
+1. Start
+
+2. Receive the Base64-encoded string.
+
+3. Decode the Base64 string into the original file bytes.
+
+4. Create a temporary file with the `.pdf` extension inside the application's cache directory.
+
+5. Open a `FileOutputStream` for the temporary file.
+
+6. Write the decoded bytes into the temporary file.
+
+7. Close the output stream.
+
+8. Return the temporary file.
+
+9. Stop

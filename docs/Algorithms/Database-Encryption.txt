@@ -1,0 +1,39 @@
+Algorithm: Database Encryption
+==============================
+
+Input: User password
+Output: Encrypted local database
+
+1. Start
+
+2. Receive the user's password during database creation.
+
+3. Convert the password into a cryptographic hash using the application's hashPassword() function.
+
+4. Use the resulting hashed value as the database encryption key.
+
+5. Initialize the Room database with SQLCipher using the encryption key.
+
+6. Create the required database tables, such as:
+
+   * `passwords`
+   * `documents`
+
+7. Store password records and document records in the SQLCipher database.
+
+8. SQLCipher encrypts the database contents before they are stored on the device.
+
+9. When the database is closed, the database file remains encrypted on local storage.
+
+10. During authentication, obtain the user's password again and generate the same cryptographic key.
+
+11. Use the generated key to open the SQLCipher database.
+
+12. If the key is correct, the encrypted database can be opened and its records can be accessed.
+
+13. If the key is incorrect, the database cannot be successfully opened and the stored information remains protected.
+
+14. When the user finishes using the vault, close the database connection.
+
+15. Stop
+

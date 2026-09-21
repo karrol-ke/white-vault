@@ -1,0 +1,68 @@
+Algorithm: JSON File Handler
+============================
+
+Input: File name, parent key, key, and value
+Output: Retrieved value or updated JSON file
+
+Read JSON Value (`getValue`)
+----------------------------
+
+1. Start
+
+2. Receive the application `Context`, JSON file name, parent key, and key.
+
+3. Locate the JSON file inside the application's internal files directory.
+
+4. Check whether the JSON file exists.
+
+   * If the file does not exist, return `null`.
+
+5. Open the existing JSON file using a `FileInputStream`.
+
+6. Read the file contents into a byte array.
+
+7. Convert the byte array into a UTF-8 string.
+
+8. Parse the string into a JSON object.
+
+9. Check whether the specified parent key exists.
+
+   * If the parent key does not exist, return `null`.
+
+10. Retrieve the JSON object associated with the parent key.
+
+11. Retrieve the value associated with the specified key.
+
+12. Return the retrieved value.
+
+13. Stop
+
+B. Write JSON Value (`dumpValue`)
+---------------------------------
+
+1. Start
+
+2. Receive the application `Context`, JSON file name, parent key, key, and value.
+
+3. Locate the JSON file inside the application's internal files directory.
+
+4. Check whether the file exists and contains data.
+
+   * If it exists, open it using `FileInputStream`.
+   * Read the contents and parse them into a JSON object.
+   * If it does not exist, create a new empty JSON object.
+
+5. Check whether the specified parent key exists.
+
+6. If the parent key exists, retrieve its JSON object.
+
+7. If the parent key does not exist, create a new JSON object and attach it to the root JSON object.
+
+8. Add the specified key and value to the parent JSON object.
+
+9. Write the updated JSON object back to the file using `FileOutputStream`.
+
+10. Format the JSON with indentation for readable storage.
+
+11. Stop
+
