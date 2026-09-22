@@ -35,7 +35,7 @@ Features
     
 
 Images
-~~~~~~
+======
 <p align="center">
   <img src="./assets/screenshots/home_page.jpg"/>
   <img src="./assets/screenshots/password_activity.jpg"/>
