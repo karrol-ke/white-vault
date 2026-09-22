@@ -8,7 +8,7 @@ For Users
 =========
 
 Get Started
-~~~~~~~~~~~
+-----------
 * Download and install the latest version of the application from the "Releases" section of the repository.
 * Enter a "Username" and "Password" to create your secure database.
 * Authenticate using your "Password" to unlock and access the database.
@@ -17,7 +17,7 @@ Get Started
 
 
 Features
-~~~~~~~~
+--------
 1. Password Locker
     - Store username/email.
     - Store password.
@@ -35,7 +35,7 @@ Features
     
 
 Images
-======
+------
 <p align="center">
   <img src="./assets/screenshots/home_page.jpg"/>
   <img src="./assets/screenshots/password_activity.jpg"/>
@@ -47,7 +47,7 @@ Images
     
 
 Security Notice
-~~~~~~~~~~~~~~~
+---------------
 This application is designed to protect sensitive information. Users should:
 
 * Keep their authentication credentials private.
@@ -55,7 +55,7 @@ This application is designed to protect sensitive information. Users should:
 * Keep the application updated when new security improvements are released.
 
 **Important**
-~~~~~~~~~~~
+-----------
 This project is intended for educational and development purposes. Users should verify the application's security before relying on it for highly sensitive or critical information.
 
     
@@ -64,7 +64,7 @@ For Contributors
 ================
 
 Project Information
-~~~~~~~~~~~~~~~~~~~
+-------------------
 - Platform: Android
 - Language: Java
 - IDE: Android Studio
@@ -74,7 +74,7 @@ Project Information
 
 
 Dependencies
-~~~~~~~~~~~~
+------------
 
         dependencies {
             implementation("androidx.documentfile:documentfile:1.0.1")
@@ -87,7 +87,7 @@ Dependencies
 
         
 Development Guidelines
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 - Follow the existing project structure.
 - Keep code modular and readable.
 - Use meaningful class, method, and variable names.
@@ -97,7 +97,7 @@ Development Guidelines
 
 
 Security Guidelines
-~~~~~~~~~~~~~~~~~~~
+-------------------
 - Never commit passwords or personal information.
 - Never commit database keys, API keys, or encryption keys.
 - Do not include real user data.
