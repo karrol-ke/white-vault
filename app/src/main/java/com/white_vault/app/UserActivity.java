@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,17 +49,24 @@ public class UserActivity extends AppCompatActivity {
                 progress_bar.post(() -> {
                     user_name = text_user_name.getText().toString();
                     user_password = text_user_password.getText().toString();
-                    // Hashing Password
-                    hashed_key = cryptographic.hashPassword(user_password);
-                    dataBaseManager.createDatabase(UserActivity.this, hashed_key);
-                    // Saving user info
-                    JsonHandler.dumpValue(UserActivity.this, "app_data.json", "user_info", "user_name", user_name);
-                    // Closing Database
-                    dataBaseManager.closeDataBase();
+
+                    if (user_name.isEmpty() || user_password.isEmpty()){
+                        Toast.makeText(UserActivity.this, "Please provide your credentials", Toast.LENGTH_LONG).show();
+                        progress_bar.setVisibility(View.INVISIBLE);
+                        button_create_database.setVisibility(View.VISIBLE);
+                    }else {
+                        // Hashing Password
+                        hashed_key = cryptographic.hashPassword(user_password);
+                        dataBaseManager.createDatabase(UserActivity.this, hashed_key);
+                        // Saving user info
+                        JsonHandler.dumpValue(UserActivity.this, "app_data.json", "user_info", "user_name", user_name);
+                        // Closing Database
+                        dataBaseManager.closeDataBase();
+                        intent = new Intent(UserActivity.this, AuthenticationActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 });
-                intent = new Intent(UserActivity.this, AuthenticationActivity.class);
-                startActivity(intent);
-                finish();
             }
         });
 
