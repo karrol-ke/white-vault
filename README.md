@@ -37,12 +37,12 @@ Features
 Images
 ------
 <p align="center">
-  <img src="./assets/screenshots/home_page.jpg"/>
-  <img src="./assets/screenshots/password_activity.jpg"/>
-  <img src="./assets/screenshots/password_details.jpg"/>
-  <img src="./assets/screenshots/document_activity.jpg"/>
-  <img src="./assets/screenshots/document_details.jpg"/>
-  <img src="./assets/screenshots/document_view.jpg"/>
+  <img src="./assets/screenshots/home_page.jpg" width="30%"/>
+  <img src="./assets/screenshots/password_activity.jpg" width="30%"/>
+  <img src="./assets/screenshots/password_details.jpg" width="30%" />
+  <img src="./assets/screenshots/document_activity.jpg" width="30%" />
+  <img src="./assets/screenshots/document_details.jpg" width="30%" />
+  <img src="./assets/screenshots/document_view.jpg" width="30%" />
 </p>
     
 
