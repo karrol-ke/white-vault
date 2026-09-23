@@ -28,7 +28,9 @@ import com.white_vault.app.data_base.DataBase;
 import com.white_vault.app.data_base.DataBaseOperator;
 import com.white_vault.app.data_base.Password;
 
+import java.security.SecureRandom;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -74,7 +76,7 @@ public class PasswordActivity extends AppCompatActivity {
                 new_password.setHint("Password");
 
                 EditText new_description = new EditText(PasswordActivity.this);
-                new_description.setHint("Description");
+                new_description.setHint("Description (Optional)");
 
                 layout.addView(new_service_name);
                 layout.addView(new_id);
@@ -86,24 +88,30 @@ public class PasswordActivity extends AppCompatActivity {
                         .setView(layout)
                         .setPositiveButton("Save", (dialogInterface, which) -> {
 
+                            String identifier = generateIdentifier();
+                            String id = new_id.getText().toString().trim();
                             String service = new_service_name.getText().toString();
-                            String identifier = new_id.getText().toString().trim();
                             String description = new_description.getText().toString();
                             String date;
 
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            if (id.isEmpty() || service.isEmpty() || new_password.getText().toString().isEmpty()){
+                                Toast.makeText(PasswordActivity.this, "Empty values not acceptable", Toast.LENGTH_SHORT).show();
+                            }else {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                     date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy")
-                                );
-                            } else {
-                                date = "";
+                                    );
+                                } else {
+                                    date = "";
+                                }
+
+                                databaseExecutor.execute(() -> {db.passwordDao().insert(new Password(
+                                        identifier, id, service, new_password.getText().toString(), date, description));
+                                    runOnUiThread(() -> {
+                                        loadPasswords();
+                                    });
+                                });
                             }
 
-                            databaseExecutor.execute(() -> {db.passwordDao().insert(new Password(
-                                    identifier, service, new_password.getText().toString(), date, description));
-                                runOnUiThread(() -> {
-                                    loadPasswords();
-                                });
-                            });
                         }).setNegativeButton("Cancel", null).create();
 
                 dialog.show();
@@ -111,7 +119,7 @@ public class PasswordActivity extends AppCompatActivity {
         });
     }
 
-    public void addCard(LinearLayout container, int iconResId,String id, String service_name, String date) {
+    public void addCard(LinearLayout container, int iconResId, String identifier, String id, String service_name, String date) {
 
         Context context = this;
 
@@ -189,7 +197,7 @@ public class PasswordActivity extends AppCompatActivity {
 
         // Listener for each card
         card.setOnClickListener(v -> {
-            fetchPasswordDetails(id);
+            fetchPasswordDetails(identifier);
         });
 
         card.addView(mainLayout);
@@ -213,7 +221,7 @@ public class PasswordActivity extends AppCompatActivity {
         serviceView.setText("Service: " + password.service);
 
         TextView identifierView = new TextView(this);
-        identifierView.setText("Username: " + password.identifier);
+        identifierView.setText("Username: " + password.id);
 
         TextView passwordView = new TextView(this);
         passwordView.setText("Password: " + password.value);
@@ -274,6 +282,7 @@ public class PasswordActivity extends AppCompatActivity {
                             container,
                             R.drawable.icon_key,
                             password.identifier,
+                            password.id,
                             password.service,
                             password.date
                     );
@@ -290,6 +299,30 @@ public class PasswordActivity extends AppCompatActivity {
                 Toast.makeText(PasswordActivity.this, "Password deleted", Toast.LENGTH_SHORT).show();
             });
         });
+    }
+
+    public static String generateIdentifier() {
+
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" + "0123456789";
+
+        int length = 7;
+
+        SecureRandom random = new SecureRandom();
+        StringBuilder identifier = new StringBuilder(length);
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            identifier.append(characters.charAt(index));
+        }
+
+        DateTimeFormatter formatter = null;
+        String currentDateTime = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            formatter = DateTimeFormatter.ofPattern("ddMMyyyyHHmmss");
+            currentDateTime = LocalDateTime.now().format(formatter);
+        }
+
+        return identifier.toString() + "-" + currentDateTime;
     }
 
 }
