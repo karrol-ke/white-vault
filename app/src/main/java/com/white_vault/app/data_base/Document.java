@@ -10,12 +10,14 @@ public class Document {
     @NonNull
 
     public String identifier;
+    public String document_name;
     public String data;
     public String date;
     public String description;
 
-    public Document(@NonNull String identifier, String data, String date, String description){
+    public Document(@NonNull String identifier, String document_name, String data, String date, String description){
         this.identifier = identifier;
+        this.document_name = document_name;
         this.data = data;
         this.date = date;
         this.description = description;

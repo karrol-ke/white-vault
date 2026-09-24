@@ -32,7 +32,9 @@ import com.white_vault.app.data_base.DataBase;
 import com.white_vault.app.data_base.DataBaseOperator;
 import com.white_vault.app.data_base.Document;
 
+import java.security.SecureRandom;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -46,8 +48,8 @@ public class DocumentActivity extends AppCompatActivity {
     ProgressBar progress_bar;
     private LinearLayout container;
     private DataBase db;
-    private String pendingIdentifier;
-    private String pendingDescription;
+    private String document_name;
+    private String description;
     private ActivityResultLauncher<String[]> filePicker;
     Intent intent;
 
@@ -97,13 +99,13 @@ public class DocumentActivity extends AppCompatActivity {
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(dpToPx(this, 40), 0, dpToPx(this, 40), 0);
 
-        EditText newIdentifier = new EditText(this);
-        newIdentifier.setHint("Document Name");
+        EditText doc_name = new EditText(this);
+        doc_name.setHint("Document Name");
 
         EditText newDescription = new EditText(this);
         newDescription.setHint("Description");
 
-        layout.addView(newIdentifier);
+        layout.addView(doc_name);
         layout.addView(newDescription);
 
         new AlertDialog.Builder(this)
@@ -111,14 +113,14 @@ public class DocumentActivity extends AppCompatActivity {
                 .setView(layout)
                 .setPositiveButton("Choose File", (dialog, which) -> {
 
-                    pendingIdentifier = newIdentifier.getText().toString().trim();
-                    pendingDescription = newDescription.getText().toString().trim();
+                    document_name = doc_name.getText().toString().trim();
+                    description = newDescription.getText().toString().trim();
 
-                    if (pendingIdentifier.isEmpty()) {
-                        return;
+                    if (document_name.isEmpty()) {
+                        Toast.makeText(this, "Document name not be empty.", Toast.LENGTH_SHORT).show();
+                    }else {
+                        filePicker.launch(new String[]{"*/*"});
                     }
-
-                    filePicker.launch(new String[]{"*/*"});
                 }).setNegativeButton("Cancel", null).show();
     }
 
@@ -134,10 +136,8 @@ public class DocumentActivity extends AppCompatActivity {
                 }
 
                 Document document = new Document(
-                                pendingIdentifier,
-                                encodedData,
-                                date,
-                                pendingDescription
+                        generateIdentifier(), document_name,
+                        encodedData, date, description
                 );
 
                 db.documentDao().insert(document);
@@ -156,7 +156,7 @@ public class DocumentActivity extends AppCompatActivity {
         });
     }
 
-    public void addCard(LinearLayout container, int iconResId, String identifier, String date, String description) {
+    public void addCard(LinearLayout container, int iconResId, String identifier, String doc_name, String date, String description) {
 
         Context context = this;
 
@@ -203,11 +203,11 @@ public class DocumentActivity extends AppCompatActivity {
         textLayout.setOrientation(LinearLayout.VERTICAL);
 
 
-        TextView identifierView = new TextView(context);
-        identifierView.setText(identifier);
-        identifierView.setTextColor(Color.parseColor("#F5F5F5"));
-        identifierView.setTextSize(15);
-        identifierView.setTypeface(identifierView.getTypeface(), android.graphics.Typeface.BOLD);
+        TextView docNameView = new TextView(context);
+        docNameView.setText(doc_name);
+        docNameView.setTextColor(Color.parseColor("#F5F5F5"));
+        docNameView.setTextSize(15);
+        docNameView.setTypeface(docNameView.getTypeface(), android.graphics.Typeface.BOLD);
 
 
         TextView descriptionView = new TextView(context);
@@ -222,7 +222,7 @@ public class DocumentActivity extends AppCompatActivity {
         dateView.setTextSize(11);
 
 
-        textLayout.addView(identifierView);
+        textLayout.addView(docNameView);
         textLayout.addView(descriptionView);
 
         mainLayout.addView(icon);
@@ -258,10 +258,10 @@ public class DocumentActivity extends AppCompatActivity {
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(dpToPx(this, 20), 0, dpToPx(this, 20), 0);
 
-        TextView identifierView = new TextView(this);
-        identifierView.setText("Name : " + document.identifier);
-        identifierView.setTextColor(Color.WHITE);
-        identifierView.setTextSize(16);
+        TextView docNameView = new TextView(this);
+        docNameView.setText("Name : " + document.document_name);
+        docNameView.setTextColor(Color.WHITE);
+        docNameView.setTextSize(16);
 
         TextView dateView = new TextView(this);
         dateView.setText("Date: " + document.date);
@@ -278,7 +278,7 @@ public class DocumentActivity extends AppCompatActivity {
         dataView.setTextColor(Color.parseColor("#A1A1AA"));
         dataView.setTextSize(13);
 
-        layout.addView(identifierView);
+        layout.addView(docNameView);
         layout.addView(dateView);
         layout.addView(descriptionView);
         layout.addView(dataView);
@@ -315,6 +315,7 @@ public class DocumentActivity extends AppCompatActivity {
                             container,
                             R.drawable.icon_document,
                             document.identifier,
+                            document.document_name,
                             document.date,
                             document.description
                     );
@@ -337,5 +338,29 @@ public class DocumentActivity extends AppCompatActivity {
                 Toast.makeText(DocumentActivity.this, "Document deleted", Toast.LENGTH_SHORT).show();
             });
         });
+    }
+
+    private static String generateIdentifier() {
+
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" + "0123456789";
+
+        int length = 7;
+
+        SecureRandom random = new SecureRandom();
+        StringBuilder identifier = new StringBuilder(length);
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            identifier.append(characters.charAt(index));
+        }
+
+        DateTimeFormatter formatter = null;
+        String currentDateTime = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            formatter = DateTimeFormatter.ofPattern("ddMMyyyyHHmmss");
+            currentDateTime = LocalDateTime.now().format(formatter);
+        }
+
+        return identifier.toString() + "-" + currentDateTime;
     }
 }
