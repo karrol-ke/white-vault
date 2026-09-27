@@ -11,6 +11,11 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.GCMParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 
 public class Cryptographic {
@@ -68,6 +73,23 @@ public class Cryptographic {
             output.write(pdfBytes);
         }
         return pdfFile;
+    }
+
+    public String encrypt(String plainText, String key) throws Exception {
+
+        // Convert 64 hex characters → 32 bytes
+        byte[] keyBytes = new byte[32];
+
+        for (int i = 0; i < 32; i++) {
+            keyBytes[i] = (byte) Integer.parseInt(key.substring(i * 2, i * 2 + 2), 16);
+        }
+
+        SecretKeySpec key_spec = new SecretKeySpec(keyBytes, "AES");
+        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, key_spec);
+        byte[] encrypted = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
+
+        return Base64.encodeToString(encrypted, Base64.NO_WRAP);
     }
 
 }

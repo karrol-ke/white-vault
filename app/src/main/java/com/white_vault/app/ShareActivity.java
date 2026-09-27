@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,12 +12,22 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.white_vault.app.data_base.DataBase;
+import com.white_vault.app.data_base.DataBaseOperator;
+import com.white_vault.app.data_base.Document;
+
 import java.security.SecureRandom;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ShareActivity extends AppCompatActivity {
 
+    private final ExecutorService databaseExecutor = Executors.newSingleThreadExecutor();
+    Cryptographic cryptographic = new Cryptographic();
+    private DataBase db;
     TextView text_one_time_key;
     Button button_stop_sharing;
+    private String PDF_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +40,12 @@ public class ShareActivity extends AppCompatActivity {
             return insets;
         });
 
+        db = DataBaseOperator.getDatabase();
+
+        String identifier = getIntent().getStringExtra("id");
+        String[] one_time_key = generateOneTimeKey().split("-");
+        startSharing(identifier, one_time_key[1], one_time_key[0]);
+
         button_stop_sharing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,7 +54,7 @@ public class ShareActivity extends AppCompatActivity {
         });
     }
 
-    public static String generateOneTimeKey() {
+    private static String generateOneTimeKey() {
 
         String characters = "abcdefghijklmnopqrstuvwxyz" + "0123456789";
 
@@ -56,5 +73,27 @@ public class ShareActivity extends AppCompatActivity {
         }
 
         return address.toString() + "-" + key.toString();
+    }
+
+    private void startSharing(String identifier, String key, String address){
+        databaseExecutor.execute(() -> {
+            try {
+                Document document = db.documentDao().getValue(identifier);
+
+                if (document == null) {
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, "Document not found", Toast.LENGTH_SHORT).show();
+                        finish();
+                    });
+                }else {
+                    PDF_data = cryptographic.encrypt(document.data, key);
+                }
+
+            } catch (Exception e) {
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Failed to open PDF", Toast.LENGTH_SHORT).show();
+                });
+            }
+        });
     }
 }
