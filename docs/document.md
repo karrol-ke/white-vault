@@ -157,6 +157,7 @@ Technical Implementation
         |    |        |        - DocumentActivity.java
         |    |        |        - DocumentViewActivity.java
         |    |        |        - JsonHandler.java
+        |    |        |        - ShareActivity.java
         |    |        |        - UserActivity.java
         |    |        |        - PasswordActivity.java
         |    |        |
@@ -171,6 +172,7 @@ Technical Implementation
         |    |        |    |    - activity_user.xml
         |    |        |    |    - activity_document.xml
         |    |        |    |    - activity_document_view.xml
+        |    |        |    |    - activity_share.xml
         |    |        |    |    - activity_password.xml
         |    |        |    |
         |    |        |    |- mipmap/
