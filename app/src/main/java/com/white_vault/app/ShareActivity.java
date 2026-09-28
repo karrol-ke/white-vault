@@ -1,10 +1,8 @@
 package com.white_vault.app;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -46,12 +44,14 @@ public class ShareActivity extends AppCompatActivity {
         });
 
         button_stop_sharing = findViewById(R.id.button_stop_sharing);
-        db = DataBaseOperator.getDatabase();
 
+        db = DataBaseOperator.getDatabase();
         String identifier = getIntent().getStringExtra("id");
 
         String[] one_time_key = generateOneTimeKey().split("-");
         startSharing(identifier, one_time_key[1], one_time_key[0]);
+
+
 
         button_stop_sharing.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +93,7 @@ public class ShareActivity extends AppCompatActivity {
                         finish();
                     });
                 }else {
-                    PDF_data = cryptographic.encrypt(document.data, key);
+                    PDF_data = cryptographic.encrypt(document.data, cryptographic.hashPassword(key));
                     reference = realtime_database.getReference(address);
                     reference.setValue(PDF_data);
                 }
