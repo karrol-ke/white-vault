@@ -1,9 +1,11 @@
 package com.white_vault.app;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.pdf.PdfRenderer;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,8 +30,7 @@ public class DocumentViewActivity extends AppCompatActivity {
     Cryptographic cryptographic = new Cryptographic();
     ImageView pdfPage;
     TextView text_page_number;
-    Button button_previous;
-    Button button_next;
+    Button button_previous, button_next, button_share;
     private DataBase db;
     private PdfRenderer pdfRenderer;
     private PdfRenderer.Page currentPage;
@@ -52,6 +53,7 @@ public class DocumentViewActivity extends AppCompatActivity {
         text_page_number = findViewById(R.id.text_page_number);
         button_previous = findViewById(R.id.button_previous);
         button_next = findViewById(R.id.button_next);
+        button_share = findViewById(R.id.button_share);
 
         String identifier = getIntent().getStringExtra("id");
 
@@ -76,6 +78,12 @@ public class DocumentViewActivity extends AppCompatActivity {
                 currentPageIndex++;
                 renderPage(currentPageIndex);
             }
+        });
+
+        button_share.setOnClickListener(view ->  {
+            Intent intent = new Intent(DocumentViewActivity.this, ShareActivity.class);
+            intent.putExtra("id", identifier);
+            startActivity(intent);
         });
 
         loadDocument(identifier);

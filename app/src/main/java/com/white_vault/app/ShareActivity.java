@@ -1,6 +1,7 @@
 package com.white_vault.app;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,6 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.white_vault.app.data_base.DataBase;
 import com.white_vault.app.data_base.DataBaseOperator;
 import com.white_vault.app.data_base.Document;
@@ -24,8 +27,10 @@ public class ShareActivity extends AppCompatActivity {
 
     private final ExecutorService databaseExecutor = Executors.newSingleThreadExecutor();
     Cryptographic cryptographic = new Cryptographic();
+    FirebaseDatabase realtime_database = FirebaseDatabase.getInstance();
+    DatabaseReference reference;
     private DataBase db;
-    TextView text_one_time_key;
+
     Button button_stop_sharing;
     private String PDF_data;
 
@@ -40,9 +45,11 @@ public class ShareActivity extends AppCompatActivity {
             return insets;
         });
 
+        button_stop_sharing = findViewById(R.id.button_stop_sharing);
         db = DataBaseOperator.getDatabase();
 
         String identifier = getIntent().getStringExtra("id");
+
         String[] one_time_key = generateOneTimeKey().split("-");
         startSharing(identifier, one_time_key[1], one_time_key[0]);
 
@@ -87,6 +94,8 @@ public class ShareActivity extends AppCompatActivity {
                     });
                 }else {
                     PDF_data = cryptographic.encrypt(document.data, key);
+                    reference = realtime_database.getReference(address);
+                    reference.setValue(PDF_data);
                 }
 
             } catch (Exception e) {
