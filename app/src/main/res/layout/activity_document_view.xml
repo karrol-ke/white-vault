@@ -42,20 +42,34 @@
 
         <Button
             android:id="@+id/button_previous"
-            android:layout_width="110dp"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
             android:text="Previous"
+            android:textSize="11sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/primary"
+            android:layout_marginStart="25dp"/>
+
+        <Button
+            android:id="@+id/button_next"
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="Next"
+            android:textSize="11sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/primary"/>
 
         <Button
-            android:id="@+id/button_next"
-            android:layout_width="110dp"
+            android:id="@+id/button_share"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="Next"
+            android:text="Share"
+            android:textSize="11sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/primary"/>
+            android:backgroundTint="@color/primary"
+            android:layout_marginEnd="25dp"/>
 
     </LinearLayout>
 
