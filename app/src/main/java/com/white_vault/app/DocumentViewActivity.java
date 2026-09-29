@@ -59,10 +59,9 @@ public class DocumentViewActivity extends AppCompatActivity {
 
         db = DataBaseOperator.getDatabase();
 
-        if (db == null || identifier == null) {
+        if (db == null){
             Toast.makeText(this, "Unable to open document", Toast.LENGTH_SHORT).show();
             finish();
-
             return;
         }
 
