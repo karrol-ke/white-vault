@@ -199,36 +199,36 @@ Technical Implementation
         
     A simplified authentication flow is:
 
-    User
-     ↓
-    Enter Authentication Information
-     ↓
-    Authentication Validation
-     ↓
-     ┌───────────────┐
-     │     Valid?    │
-     └───────────────┘
-       ↓ Yes       ↓ No
-     Unlock App    Show Error
-       ↓
-     Access Locker
+               User
+                ↓
+            Enter Authentication Information
+                ↓
+            Authentication Validation
+                ↓
+        ┌───────────────┐
+        │     Valid?    │
+        └───────────────┘
+        ↓ Yes       ↓ No
+        Unlock App    Show Error
+        ↓
+        Access Locker
         
 3. Document Module
     The Document Module is responsible for managing documents and images stored within the locker.
         
     A typical document operation follows:
 
-    Select Document
-       ↓
-    Validate File
-       ↓
-    Process / Protect File 
-       ↓
-    Store Document
-       ↓
-    Save Metadata
-       ↓
-    Display in Locker
+        Select Document
+            ↓
+        Validate File
+            ↓
+        Process / Protect File 
+            ↓
+        Store Document
+            ↓
+        Save Metadata
+            ↓
+        Display in Locker
             
     Document metadata may include information such as the document name, file type, location, creation date, and category.
         
