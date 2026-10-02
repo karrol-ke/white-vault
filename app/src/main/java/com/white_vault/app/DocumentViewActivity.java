@@ -1,8 +1,12 @@
 package com.white_vault.app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.pdf.PdfRenderer;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
@@ -80,9 +84,13 @@ public class DocumentViewActivity extends AppCompatActivity {
         });
 
         button_share.setOnClickListener(view ->  {
-            Intent intent = new Intent(DocumentViewActivity.this, ShareActivity.class);
-            intent.putExtra("id", identifier);
-            startActivity(intent);
+            if (isInternetAvailable()){
+                Intent intent = new Intent(DocumentViewActivity.this, ShareActivity.class);
+                intent.putExtra("id", identifier);
+                startActivity(intent);
+            }else {
+                Toast.makeText(this, "Turn On the Internet", Toast.LENGTH_SHORT).show();
+            }
         });
 
         loadDocument(identifier);
@@ -167,5 +175,25 @@ public class DocumentViewActivity extends AppCompatActivity {
                 Toast.makeText(this, "Page rendering failed", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private boolean isInternetAvailable() {
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager == null) {
+            return false;
+        }
+
+        Network network = connectivityManager.getActiveNetwork();
+        if (network == null) {
+            return false;
+        }
+
+        NetworkCapabilities capabilities = connectivityManager.getNetworkCapabilities(network);
+        if (capabilities == null) {
+            return false;
+        }
+
+        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
     }
 }
