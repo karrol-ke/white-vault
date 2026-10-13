@@ -29,7 +29,13 @@ Features
     - Add document descriptions.
     - Protect documents from unauthorized access.
 
-3. Security
+3. Document Sharing
+    - One-Time Key Generation
+    - AES Document Encryption
+    - Web-Based Document Access
+    - Client-Side Decryption
+
+4. Security
     - PIN/password authentication.
     - Encrypt sensitive stored data.
     
