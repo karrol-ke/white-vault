@@ -56,8 +56,15 @@ Functional requirements describe the features and operations that the applicatio
     * Users shall be able to view stored documents.
     * Users shall be able to delete documents from the locker.
     * Users shall be able to organize or identify documents using names or categories.
+
+4. Document Sharing
+    * The application shall allow users to share stored PDF documents with other recipients.
+    * The application shall automatically generate a One-Time Key for each document-sharing session.
+    * The application shall encrypt document data using AES encryption before uploading it to Realtime Database.
+    * Recipients shall be able to access the shared document through a web interface by entering the provided One-Time Key.
+    * The web interface shall decrypt the retrieved document data and allow recipients to view the shared PDF.
     
-4. Security and Data Protection
+5. Security and Data Protection
     * The application shall protect sensitive information stored within the locker.
     * Password related data shall be protected using appropriate cryptographic techniques.
     * The application shall prevent unauthorized access to protected content.
@@ -119,8 +126,18 @@ The functionalities of the application are described below.
     * Users can edit existing password entries.
     * Users can delete password entries.
     * Password information is protected from unnecessary exposure.
+
+4. Document Sharing
+    The Document Sharing functionality allows users to share stored PDF documents with recipients through a web-based interface while protecting the document data using encryption.
+
+    * Users can initiate sharing for stored PDF documents.
+    * The application automatically generates a One-Time Key for each sharing session.
+    * Document data is encrypted using AES encryption before being uploaded to Realtime Database.
+    * Recipients can access shared documents through the website by providing the required sharing details and One-Time Key.
+    * The website decrypts the retrieved data and allows recipients to view the shared PDF.
+    * Users can stop sharing by removing the shared data from Realtime Database.
         
-4. Encryption and Security
+5. Encryption and Security
     Encryption and security functionality protects sensitive information stored by the application.
         
     * Password related information is protected from being stored or exposed as plain text where applicable.
