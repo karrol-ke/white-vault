@@ -119,7 +119,7 @@ public class DocumentActivity extends AppCompatActivity {
                     if (document_name.isEmpty()) {
                         Toast.makeText(this, "Document name not be empty.", Toast.LENGTH_SHORT).show();
                     }else {
-                        filePicker.launch(new String[]{"*/*"});
+                        filePicker.launch(new String[]{"application/pdf"});
                     }
                 }).setNegativeButton("Cancel", null).show();
     }
