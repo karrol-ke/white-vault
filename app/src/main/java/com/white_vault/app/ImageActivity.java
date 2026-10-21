@@ -269,7 +269,7 @@ public class ImageActivity extends AppCompatActivity {
                 for (Image image : images) {
                     addCard(
                             container,
-                            R.drawable.icon_mage,
+                            R.drawable.icon_image,
                             image.identifier,
                             image.name,
                             image.date

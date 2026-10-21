@@ -225,7 +225,7 @@
 
             <!-- Videos -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_videos"
+                android:id="@+id/card_video"
                 android:layout_width="0dp"
                 android:layout_height="110dp"
                 android:layout_margin="8dp"

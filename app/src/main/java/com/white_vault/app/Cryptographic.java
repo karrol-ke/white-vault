@@ -5,11 +5,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Base64;
+import android.util.Base64InputStream;
+import android.widget.VideoView;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -80,6 +85,33 @@ public class Cryptographic {
         );
 
         return bitmap;
+    }
+
+    public File decodeVideo(Context context, String encode_data) throws IOException {
+
+        File videoFile = File.createTempFile("vault_", ".mp4", context.getFilesDir());
+
+        try (
+                InputStream input = new Base64InputStream(
+                        new ByteArrayInputStream(
+                                encode_data.getBytes(StandardCharsets.US_ASCII)
+                        ),
+                        Base64.DEFAULT
+                );
+                OutputStream output = new FileOutputStream(videoFile)
+        ) {
+            byte[] buffer = new byte[8192];
+            int length;
+
+            while ((length = input.read(buffer)) != -1) {
+                output.write(buffer, 0, length);
+            }
+        } catch (IOException e) {
+            videoFile.delete();
+            throw e;
+        }
+
+        return videoFile;
     }
 
     public File decodePDF(Context context, String encode_data) throws Exception {
