@@ -110,7 +110,7 @@ public class DocumentViewActivity extends AppCompatActivity {
                     return;
                 }
 
-                temporaryPdf = cryptographic.decodeFile(this, document.data);
+                temporaryPdf = cryptographic.decodePDF(this, document.data);
                 openPdf();
 
             } catch (Exception e) {

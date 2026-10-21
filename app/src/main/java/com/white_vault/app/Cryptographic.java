@@ -1,6 +1,8 @@
 package com.white_vault.app;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Base64;
 
@@ -64,9 +66,25 @@ public class Cryptographic {
         }
     }
 
-    public File decodeFile(Context context, String base64Pdf) throws Exception {
+    public Bitmap decodeImage(String encode_data) {
 
-        byte[] pdfBytes = Base64.decode(base64Pdf, Base64.DEFAULT);
+        byte[] imageBytes = Base64.decode(
+                encode_data,
+                Base64.DEFAULT
+        );
+
+        Bitmap bitmap = BitmapFactory.decodeByteArray(
+                imageBytes,
+                0,
+                imageBytes.length
+        );
+
+        return bitmap;
+    }
+
+    public File decodePDF(Context context, String encode_data) throws Exception {
+
+        byte[] pdfBytes = Base64.decode(encode_data, Base64.DEFAULT);
         File pdfFile = File.createTempFile("vault_", ".pdf", context.getCacheDir());
 
         try (FileOutputStream output = new FileOutputStream(pdfFile)) {

@@ -4,7 +4,7 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
 @Database(
-        entities = {Password.class, Document.class},
+        entities = {Password.class, Document.class, Image.class},
         version = 1,
         exportSchema = false
 )
@@ -12,4 +12,5 @@ import androidx.room.RoomDatabase;
 public abstract class DataBase extends RoomDatabase {
     public abstract PasswordDao passwordDao();
     public abstract DocumentDao documentDao();
+    public abstract ImageDao imageDao();
 }

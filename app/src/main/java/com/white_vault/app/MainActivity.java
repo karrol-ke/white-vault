@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements DefaultLifecycleO
     DataBaseManager dataBaseManager = new DataBaseManager();
     FirebaseDatabase realtime_database = FirebaseDatabase.getInstance();
     DatabaseReference reference;
-    MaterialCardView card_password, card_document;
+    MaterialCardView card_password, card_document, card_image;
     TextView text_user_name;
     Intent intent;
     String user_name;
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements DefaultLifecycleO
         text_user_name = findViewById(R.id.text_user_name);
         card_password = findViewById(R.id.card_password);
         card_document = findViewById(R.id.card_document);
+        card_image = findViewById(R.id.card_image);
 
         text_user_name.setText(user_name);
 
@@ -89,6 +90,14 @@ public class MainActivity extends AppCompatActivity implements DefaultLifecycleO
             @Override
             public void onClick(View view) {
                 intent = new Intent(MainActivity.this, DocumentActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        card_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(MainActivity.this, ImageActivity.class);
                 startActivity(intent);
             }
         });
