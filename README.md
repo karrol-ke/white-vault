@@ -28,6 +28,16 @@ Features
     - View and delete documents.
     - Add document descriptions.
     - Protect documents from unauthorized access.
+      
+3. Image Locker
+    - Store images securely.
+    - Delete images from the vault.
+    - Protect images from unauthorized access.
+      
+4. Video Locker
+    - Store videos securely.
+    - Play saved videos.
+    - Delete videos from the vault.
 
 3. Document Sharing
     - One-Time Key Generation
