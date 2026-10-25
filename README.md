@@ -33,19 +33,14 @@ Features
     - Store images securely.
     - Delete images from the vault.
     - Protect images from unauthorized access.
-      
-4. Video Locker
-    - Store videos securely.
-    - Play saved videos.
-    - Delete videos from the vault.
 
-3. Document Sharing
+4. Document Sharing
     - One-Time Key Generation
     - AES Document Encryption
     - Web-Based Document Access
     - Client-Side Decryption
 
-4. Security
+5. Security
     - PIN/password authentication.
     - Encrypt sensitive stored data.
     
