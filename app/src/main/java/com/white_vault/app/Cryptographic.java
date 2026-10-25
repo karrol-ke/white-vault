@@ -87,33 +87,6 @@ public class Cryptographic {
         return bitmap;
     }
 
-    public File decodeVideo(Context context, String encode_data) throws IOException {
-
-        File videoFile = File.createTempFile("vault_", ".mp4", context.getFilesDir());
-
-        try (
-                InputStream input = new Base64InputStream(
-                        new ByteArrayInputStream(
-                                encode_data.getBytes(StandardCharsets.US_ASCII)
-                        ),
-                        Base64.DEFAULT
-                );
-                OutputStream output = new FileOutputStream(videoFile)
-        ) {
-            byte[] buffer = new byte[8192];
-            int length;
-
-            while ((length = input.read(buffer)) != -1) {
-                output.write(buffer, 0, length);
-            }
-        } catch (IOException e) {
-            videoFile.delete();
-            throw e;
-        }
-
-        return videoFile;
-    }
-
     public File decodePDF(Context context, String encode_data) throws Exception {
 
         byte[] pdfBytes = Base64.decode(encode_data, Base64.DEFAULT);

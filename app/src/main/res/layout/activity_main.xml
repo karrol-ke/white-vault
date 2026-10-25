@@ -223,46 +223,6 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Videos -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_video"
-                android:layout_width="0dp"
-                android:layout_height="110dp"
-                android:layout_margin="8dp"
-                android:layout_columnWeight="1"
-                app:cardBackgroundColor="#121217"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="4dp"
-                app:strokeColor="#30FFFFFF"
-                app:strokeWidth="1dp"
-                android:clickable="true"
-                android:focusable="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="18dp">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/icon_video_folder"
-                        app:tint="@color/primary" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Videos"
-                        android:textColor="#F5F5F5"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
         </GridLayout>
     </LinearLayout>
 
