@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements DefaultLifecycleO
     FirebaseDatabase realtime_database = FirebaseDatabase.getInstance();
     DatabaseReference reference;
     MaterialCardView card_password, card_document, card_image;
-    TextView text_user_name;
+    TextView text_user_name, text_version;
     Intent intent;
     String user_name;
     String releases_url = "https://github.com/karrol-ke/white-vault/releases";
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements DefaultLifecycleO
         user_name = JsonHandler.getValue(this, "app_data.json", "user_info", "user_name");
 
         text_user_name = findViewById(R.id.text_user_name);
+        text_version = findViewById(R.id.text_version);
         card_password = findViewById(R.id.card_password);
         card_document = findViewById(R.id.card_document);
         card_image = findViewById(R.id.card_image);
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements DefaultLifecycleO
 
         try {
             String current_app_version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+            text_version.setText("v" + current_app_version);
             reference.child("version").get().addOnCompleteListener(task -> {
                 DataSnapshot version_snapshot = task.getResult();
                 String last_version = version_snapshot.getValue(String.class);
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements DefaultLifecycleO
                         String version_info = info_snapshot.getValue(String.class);
                         showUpdateAvailable(last_version, version_info);
                     });
+                    text_version.setText("Update Avaliable");
                 }
             });
         } catch (Exception e) {

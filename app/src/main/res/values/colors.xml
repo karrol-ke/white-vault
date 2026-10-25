@@ -2,8 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="background">#121212</color>
-    <color name="primary">#7C3AED</color>
-    <color name="card">#121217</color>
-    <color name="stoke">#30FFFFFF</color>
+    <color name="background">#EBECEF</color>
+    <color name="primary">#2171B5</color>
+    <color name="card">#C6DBEF</color>
+    <color name="stoke">#08519C</color>
+    <color name="text">#1C2B48</color>
 </resources>

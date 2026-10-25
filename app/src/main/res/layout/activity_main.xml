@@ -6,224 +6,244 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/background">
+    android:background="@color/primary">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="30sp"
-            android:fontFamily="sans-serif"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_centerHorizontal="true"/>
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="80dp">
-
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_margin="15dp"
-            app:cardBackgroundColor="@color/card"
-            app:strokeWidth="2dp"
-            app:strokeColor="@color/primary">
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-            <LinearLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="White"
+                android:textSize="30sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Vault"
+                android:textSize="30sp"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:textColor="@color/primary"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="80dp">
+
+            <GridLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:rowCount="1"
+                android:padding="12dp">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="5dp">
+                <!-- Passwords -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_password"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_margin="8dp"
+                    android:layout_columnWeight="1"
+                    app:cardBackgroundColor="@color/card"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="4dp"
+                    app:strokeColor="@color/stoke"
+                    app:strokeWidth="1dp"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="18dp">
 
-                        <TextView
-                            android:id="@+id/text_user_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:text="User Name"
-                            android:textSize="30sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/white"/>
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/icon_lock"
+                            app:tint="@color/primary"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:text="Your Vault is Secure"
-                            android:textSize="16sp"
-                            android:textColor="#00A92A"/>
+                            android:layout_marginTop="16dp"
+                            android:text="Passwords"
+                            android:textColor="@color/text"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
-                </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
 
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/security_shield"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"/>
+                <!-- Documents -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_document"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_margin="8dp"
+                    android:layout_columnWeight="1"
+                    app:cardBackgroundColor="@color/card"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="4dp"
+                    app:strokeColor="@color/stoke"
+                    app:strokeWidth="1dp"
+                    android:clickable="true"
+                    android:focusable="true">
 
-                </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="18dp">
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/icon_folder"
+                            app:tint="@color/primary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Documents"
+                            android:textColor="@color/text"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Images -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_image"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_margin="8dp"
+                    android:layout_columnWeight="1"
+                    app:cardBackgroundColor="@color/card"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="4dp"
+                    app:strokeColor="@color/stoke"
+                    app:strokeWidth="1dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="18dp">
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/icon_image_folder"
+                            app:tint="@color/primary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Images"
+                            android:textColor="@color/text"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </GridLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/home_page_bar"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:background="@drawable/profile_photo"
+                    android:layout_marginStart="5dp"
+                    android:src="@drawable/dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:id="@+id/text_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="User Name"
+                        android:textColor="@color/text"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif"/>
+
+                    <TextView
+                        android:id="@+id/text_version"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="v0.0.0"
+                        android:textColor="@color/text"
+                        android:textSize="12dp"
+                        android:textStyle="italic"
+                        android:fontFamily="sans-serif"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+            <ImageButton
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/icon_settings"
+                android:scaleType="centerCrop"
+                android:backgroundTint="@color/card"/>
 
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:rowCount="1"
-            android:padding="12dp">
+        </RelativeLayout>
 
-            <!-- Passwords -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_password"
-                android:layout_width="0dp"
-                android:layout_height="110dp"
-                android:layout_margin="8dp"
-                android:layout_columnWeight="1"
-                app:cardBackgroundColor="@color/card"
-                app:cardCornerRadius="20dp"
-                app:strokeColor="@color/stoke"
-                app:strokeWidth="1dp"
-                android:clickable="true"
-                android:focusable="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="18dp">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/icon_lock"
-                        app:tint="@color/primary"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Passwords"
-                        android:textColor="#F5F5F5"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-
-            <!-- Documents -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_document"
-                android:layout_width="0dp"
-                android:layout_height="110dp"
-                android:layout_margin="8dp"
-                android:layout_columnWeight="1"
-                app:cardBackgroundColor="#121217"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="4dp"
-                app:strokeColor="#30FFFFFF"
-                app:strokeWidth="1dp"
-                android:clickable="true"
-                android:focusable="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="18dp">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/icon_folder"
-                        app:tint="@color/primary" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Documents"
-                        android:textColor="#F5F5F5"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Images -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_image"
-                android:layout_width="0dp"
-                android:layout_height="110dp"
-                android:layout_margin="8dp"
-                android:layout_columnWeight="1"
-                app:cardBackgroundColor="#121217"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="4dp"
-                app:strokeColor="#30FFFFFF"
-                app:strokeWidth="1dp"
-                android:clickable="true"
-                android:focusable="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="18dp">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:src="@drawable/icon_image_folder"
-                        app:tint="@color/primary" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Images"
-                        android:textColor="#F5F5F5"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </GridLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
