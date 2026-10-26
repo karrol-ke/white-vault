@@ -56,15 +56,21 @@ Functional requirements describe the features and operations that the applicatio
     * Users shall be able to view stored documents.
     * Users shall be able to delete documents from the locker.
     * Users shall be able to organize or identify documents using names or categories.
+    
+4. Image Management
+    * The application shall allow users to add and store images securely in the locker.
+    * Users shall be able to view stored images.
+    * Users shall be able to delete images from the locker.
+    * Users shall be able to identify images using names.
 
-4. Document Sharing
+5. Document Sharing
     * The application shall allow users to share stored PDF documents with other recipients.
     * The application shall automatically generate a One-Time Key for each document-sharing session.
     * The application shall encrypt document data using AES encryption before uploading it to Realtime Database.
     * Recipients shall be able to access the shared document through a web interface by entering the provided One-Time Key.
     * The web interface shall decrypt the retrieved document data and allow recipients to view the shared PDF.
     
-5. Security and Data Protection
+6. Security and Data Protection
     * The application shall protect sensitive information stored within the locker.
     * Password related data shall be protected using appropriate cryptographic techniques.
     * The application shall prevent unauthorized access to protected content.
@@ -127,7 +133,16 @@ The functionalities of the application are described below.
     * Users can delete password entries.
     * Password information is protected from unnecessary exposure.
 
-4. Document Sharing
+4. Image Management
+    The Image Management functionality allows users to securely store and manage personal images inside the application.
+    
+    * Users can add images to the locker.
+    * Users can provide a name for stored images.
+    * Users can view stored images.
+    * Users can delete unwanted images.
+    * Images are protected from unauthorized access through secure storage and encryption.
+
+5. Document Sharing
     The Document Sharing functionality allows users to share stored PDF documents with recipients through a web-based interface while protecting the document data using encryption.
 
     * Users can initiate sharing for stored PDF documents.
@@ -137,7 +152,7 @@ The functionalities of the application are described below.
     * The website decrypts the retrieved data and allows recipients to view the shared PDF.
     * Users can stop sharing by removing the shared data from Realtime Database.
         
-5. Encryption and Security
+6. Encryption and Security
     Encryption and security functionality protects sensitive information stored by the application.
         
     * Password related information is protected from being stored or exposed as plain text where applicable.
