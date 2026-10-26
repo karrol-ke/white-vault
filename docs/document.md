@@ -182,6 +182,8 @@ Technical Implementation
         |    |        |             - DocumentDao.java
         |    |        |             - Password.java
         |    |        |             - PasswordDao.java
+        |    |        |             - Image.java
+        |    |        |             - ImageDao.java
         |    |        |        - MainActivity.java
         |    |        |        - Cryptographic.java
         |    |        |        - AuthenticationActivity.java
@@ -192,6 +194,8 @@ Technical Implementation
         |    |        |        - ShareActivity.java
         |    |        |        - UserActivity.java
         |    |        |        - PasswordActivity.java
+        |    |        |        - ImageActivity.java
+        |    |        |        - ImageViewActivity.java
         |    |        |
         |    |        |-res/
         |    |        |    |- drawable/
@@ -206,6 +210,8 @@ Technical Implementation
         |    |        |    |    - activity_document_view.xml
         |    |        |    |    - activity_share.xml
         |    |        |    |    - activity_password.xml
+        |    |        |    |    - activity_image.xml
+        |    |        |    |    - activity_image_view.xml
         |    |        |    |
         |    |        |    |- mipmap/
         |    |        |    |- values/
