@@ -6,4 +6,21 @@
     </style>
 
     <style name="Theme.WhiteVault" parent="Base.Theme.WhiteVault" />
+
+    <style name="SCREEN">
+        <item name="background">@color/lPrimary</item>
+    </style>
+
+    <style name="CARD">
+        <item name="cardBackgroundColor">@color/card</item>
+        <item name="strokeColor">@color/stroke</item>
+    </style>
+
+    <style name="ICON">
+        <item name="tint">@color/lPrimary</item>
+    </style>
+
+    <style name="TEXT">
+        <item name="android:textColor">@color/text</item>
+    </style>
 </resources>
