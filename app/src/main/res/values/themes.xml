@@ -8,7 +8,11 @@
     <style name="Theme.WhiteVault" parent="Base.Theme.WhiteVault" />
 
     <style name="SCREEN">
-        <item name="background">@color/lPrimary</item>
+        <item name="android:background">@color/lPrimary</item>
+    </style>
+
+    <style name="BACKGROUND">
+        <item name="android:background">@color/white</item>
     </style>
 
     <style name="CARD">
@@ -22,5 +26,9 @@
 
     <style name="TEXT">
         <item name="android:textColor">@color/text</item>
+    </style>
+
+    <style name="ADD_BUTTON">
+        <item name="color">@color/lPrimary</item>
     </style>
 </resources>
