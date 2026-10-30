@@ -186,58 +186,40 @@
             android:padding="5dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_centerVertical="true"
                 android:gravity="center">
 
-                <ImageView
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:background="@drawable/profile_photo"
-                    android:layout_marginStart="5dp"
-                    android:src="@drawable/dp"/>
+                <ImageButton
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/icon_lock"
+                    android:layout_weight="1"
+                    style="@style/ICON"/>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginStart="10dp">
+                <ImageButton
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/icon_folder"
+                    android:layout_weight="1"
+                    style="@style/ICON"/>
 
-                    <TextView
-                        android:id="@+id/text_user_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="User Name"
-                        android:textColor="@color/text"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:fontFamily="sans-serif"/>
+                <ImageButton
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/icon_image_folder"
+                    android:layout_weight="1"
+                    style="@style/ICON"/>
 
-                    <TextView
-                        android:id="@+id/text_version"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="v0.0.0"
-                        android:textColor="@color/text"
-                        android:textSize="12dp"
-                        android:textStyle="italic"
-                        android:fontFamily="sans-serif"/>
-
-                </LinearLayout>
+                <ImageButton
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@drawable/icon_settings"
+                    android:layout_weight="1"
+                    style="@style/ICON"/>
 
             </LinearLayout>
-
-            <ImageButton
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/icon_settings"
-                android:scaleType="centerCrop"
-                android:backgroundTint="@color/card"/>
 
         </RelativeLayout>
 

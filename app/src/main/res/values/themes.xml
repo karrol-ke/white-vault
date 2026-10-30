@@ -21,6 +21,7 @@
     </style>
 
     <style name="ICON">
+        <item name="android:background">@color/transparent</item>
         <item name="tint">@color/lPrimary</item>
     </style>
 
