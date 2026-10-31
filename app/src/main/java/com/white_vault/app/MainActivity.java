@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements DefaultLifecycleO
     DataBaseManager dataBaseManager = new DataBaseManager();
     FirebaseDatabase realtime_database = FirebaseDatabase.getInstance();
     DatabaseReference reference;
-    MaterialCardView card_password, card_document, card_image;
+    ImageButton card_password, card_document, card_image;
     TextView text_user_name, text_version;
     Intent intent;
     String user_name;
@@ -51,14 +52,13 @@ public class MainActivity extends AppCompatActivity implements DefaultLifecycleO
 
         user_name = JsonHandler.getValue(this, "app_data.json", "user_info", "user_name");
 
-        text_user_name = findViewById(R.id.text_user_name);
-        text_version = findViewById(R.id.text_version);
+        //text_user_name = findViewById(R.id.text_user_name);
+        //text_version = findViewById(R.id.text_version);
         card_password = findViewById(R.id.card_password);
         card_document = findViewById(R.id.card_document);
         card_image = findViewById(R.id.card_image);
 
         text_user_name.setText(user_name);
-
         reference = realtime_database.getReference("update");
 
         try {

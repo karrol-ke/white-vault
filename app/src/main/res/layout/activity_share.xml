@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0000000"
-            android:textColor="@color/primary"
+            android:textColor="@color/lPrimary"
             android:textStyle="bold"
             android:textSize="30sp"
             android:textIsSelectable="true"/>
@@ -36,7 +36,7 @@
             android:id="@+id/button_stop_sharing"
             android:layout_width="200dp"
             android:layout_height="60dp"
-            android:backgroundTint="@color/primary"
+            android:backgroundTint="@color/lPrimary"
             android:text="Stop Sharing"
             android:textColor="@color/black"
             android:textSize="20sp"

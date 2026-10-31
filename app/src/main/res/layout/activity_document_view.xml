@@ -49,7 +49,7 @@
             android:text="Previous"
             android:textSize="11sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/primary"
+            android:backgroundTint="@color/lPrimary"
             android:layout_marginStart="25dp"/>
 
         <Button
@@ -60,7 +60,7 @@
             android:text="Next"
             android:textSize="11sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/primary"/>
+            android:backgroundTint="@color/lPrimary"/>
 
         <Button
             android:id="@+id/button_share"
@@ -70,7 +70,7 @@
             android:text="Share"
             android:textSize="11sp"
             android:textColor="@color/white"
-            android:backgroundTint="@color/primary"
+            android:backgroundTint="@color/lPrimary"
             android:layout_marginEnd="25dp"/>
 
     </LinearLayout>
