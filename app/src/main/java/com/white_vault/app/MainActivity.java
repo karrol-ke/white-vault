@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,10 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
-import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -33,8 +34,7 @@ public class MainActivity extends AppCompatActivity implements DefaultLifecycleO
     DataBaseManager dataBaseManager = new DataBaseManager();
     FirebaseDatabase realtime_database = FirebaseDatabase.getInstance();
     DatabaseReference reference;
-    ImageButton card_password, card_document, card_image;
-    TextView text_user_name, text_version;
+    BottomNavigationView navigation_bar;
     Intent intent;
     String user_name;
     String releases_url = "https://github.com/karrol-ke/white-vault/releases";
@@ -52,18 +52,13 @@ public class MainActivity extends AppCompatActivity implements DefaultLifecycleO
 
         user_name = JsonHandler.getValue(this, "app_data.json", "user_info", "user_name");
 
-        //text_user_name = findViewById(R.id.text_user_name);
-        //text_version = findViewById(R.id.text_version);
-        card_password = findViewById(R.id.card_password);
-        card_document = findViewById(R.id.card_document);
-        card_image = findViewById(R.id.card_image);
+        navigation_bar = findViewById(R.id.navigation_bar);
 
-        text_user_name.setText(user_name);
+        FragmentView(new PasswordsFragment());
         reference = realtime_database.getReference("update");
 
         try {
             String current_app_version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-            text_version.setText("v" + current_app_version);
             reference.child("version").get().addOnCompleteListener(task -> {
                 DataSnapshot version_snapshot = task.getResult();
                 String last_version = version_snapshot.getValue(String.class);
@@ -74,37 +69,32 @@ public class MainActivity extends AppCompatActivity implements DefaultLifecycleO
                         String version_info = info_snapshot.getValue(String.class);
                         showUpdateAvailable(last_version, version_info);
                     });
-                    text_version.setText("Update Avaliable");
                 }
             });
         } catch (Exception e) {
             //
         }
 
-        card_password.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(MainActivity.this, PasswordActivity.class);
-                startActivity(intent);
+        navigation_bar.setOnItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.navigation_passwords){
+                FragmentView(new PasswordsFragment());
+            }else if (item.getItemId() == R.id.navigation_documents){
+                FragmentView(new DocumentsFragment());
+            }else if (item.getItemId() == R.id.navigation_images){
+                FragmentView(new ImagesFragment());
+            }else if (item.getItemId() == R.id.navigation_settings){
+                FragmentView(new SettingsFragment());
             }
-        });
 
-        card_document.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(MainActivity.this, DocumentActivity.class);
-                startActivity(intent);
-            }
+            return true;
         });
+    }
 
-        card_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(MainActivity.this, ImageActivity.class);
-                startActivity(intent);
-            }
-        });
-
+    private void FragmentView(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_view, fragment);
+        fragmentTransaction.commit();
     }
 
     private void showUpdateAvailable(String v, String info) {

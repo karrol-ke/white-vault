@@ -53,7 +53,7 @@ public class AuthenticationActivity extends AppCompatActivity {
                 progress_bar.post(() -> {
                     KEY = cryptographic.hashPassword(text_password.getText().toString());
                     if (dataBaseManager.authenticateDatabase(AuthenticationActivity.this, KEY)){
-                        intent = new Intent (AuthenticationActivity.this, PasswordActivity.class);
+                        intent = new Intent (AuthenticationActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     }else {
