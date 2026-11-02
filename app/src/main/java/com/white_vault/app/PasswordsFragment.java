@@ -3,6 +3,7 @@ package com.white_vault.app;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -43,10 +44,6 @@ public class PasswordsFragment extends Fragment {
     ImageButton button_add;
     DataBase db = DataBaseOperator.getDatabase();
 
-    public PasswordsFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,30 +61,24 @@ public class PasswordsFragment extends Fragment {
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout layout = new LinearLayout(requireContext());
-                layout.setOrientation(LinearLayout.VERTICAL);
-                layout.setPadding(40, 0, 40, 0);
+                LayoutInflater inflater = LayoutInflater.from(requireContext());
 
-                EditText new_service_name = new EditText(context);
-                new_service_name.setHint("Service Name");
+                View dialogView = inflater.inflate(R.layout.dialog_add_password, null);
 
-                EditText new_id = new EditText(context);
-                new_id.setHint("Username / ID");
+                EditText new_service_name = dialogView.findViewById(R.id.new_service_name);
+                EditText new_id = dialogView.findViewById(R.id.new_id);
+                EditText new_password = dialogView.findViewById(R.id.new_password);
+                EditText new_description = dialogView.findViewById(R.id.new_description);
 
-                EditText new_password = new EditText(context);
-                new_password.setHint("Password");
-
-                EditText new_description = new EditText(context);
-                new_description.setHint("Description (Optional)");
-
-                layout.addView(new_service_name);
-                layout.addView(new_id);
-                layout.addView(new_password);
-                layout.addView(new_description);
+                TextView title = new TextView(requireContext());
+                title.setText("Add New Password");
+                title.setTextSize(20);
+                title.setTextColor(Color.BLACK);
+                title.setPadding(50, 40, 30, 20);
 
                 AlertDialog dialog = new AlertDialog.Builder(context)
-                        .setTitle("Add New Password")
-                        .setView(layout)
+                        .setCustomTitle(title)
+                        .setView(dialogView)
                         .setPositiveButton("Save", (dialogInterface, which) -> {
 
                             String identifier = generateIdentifier();
@@ -117,6 +108,10 @@ public class PasswordsFragment extends Fragment {
                         }).setNegativeButton("Cancel", null).create();
 
                 dialog.show();
+
+                dialog.getWindow().setBackgroundDrawableResource(R.drawable.home_page_bar);
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#2d6a4f"));
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#b31237"));
             }
         });
 

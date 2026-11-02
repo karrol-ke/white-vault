@@ -33,4 +33,8 @@
     <style name="ADD_BUTTON">
         <item name="color">@color/lPrimary</item>
     </style>
+
+    <style name="DIALOG">
+        <item name="android:background">@color/white</item>
+    </style>
 </resources>
