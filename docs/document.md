@@ -193,7 +193,6 @@ Technical Implementation
         |    |        |        - JsonHandler.java
         |    |        |        - ShareActivity.java
         |    |        |        - UserActivity.java
-        |    |        |        - PasswordActivity.java
         |    |        |        - ImageActivity.java
         |    |        |        - ImageViewActivity.java
         |    |        |
@@ -209,7 +208,6 @@ Technical Implementation
         |    |        |    |    - activity_document.xml
         |    |        |    |    - activity_document_view.xml
         |    |        |    |    - activity_share.xml
-        |    |        |    |    - activity_password.xml
         |    |        |    |    - activity_image.xml
         |    |        |    |    - activity_image_view.xml
         |    |        |    |
