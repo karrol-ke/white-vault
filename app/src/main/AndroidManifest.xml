@@ -30,9 +30,6 @@
             android:name=".DocumentActivity"
             android:exported="false" />
         <activity
-            android:name=".PasswordActivity"
-            android:exported="false" />
-        <activity
             android:name=".UserActivity"
             android:exported="false" />
         <activity
