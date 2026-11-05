@@ -1,17 +1,13 @@
 package com.white_vault.app;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,85 +116,24 @@ public class PasswordsFragment extends Fragment {
 
     public void addCard(LinearLayout container, int iconResId, String identifier, String id, String service_name, String date) {
 
-        MaterialCardView card = new MaterialCardView(context);
+        View cardView = LayoutInflater.from(context).inflate(R.layout.item_password, container, false);
+        MaterialCardView card = cardView.findViewById(R.id.password_card);
 
-        LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, dpToPx(context, 70));
+        ImageView icon = cardView.findViewById(R.id.password_icon);
+        TextView idView = cardView.findViewById(R.id.password_id);
+        TextView serviceView = cardView.findViewById(R.id.password_service);
+        TextView dateView = cardView.findViewById(R.id.password_date);
 
-        cardParams.setMargins(0, 0, 0, dpToPx(context, 8));
-
-        card.setLayoutParams(cardParams);
-        card.setClickable(true);
-        card.setFocusable(true);
-        card.setCardBackgroundColor(Color.parseColor("#121212"));
-        card.setRadius( dpToPx(context, 16));
-        card.setCardElevation(0);
-        card.setStrokeWidth( dpToPx(context, 1));
-        card.setStrokeColor(Color.parseColor("#30FFFFFF"));
-
-        LinearLayout mainLayout = new LinearLayout(context);
-        mainLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
-        mainLayout.setGravity(Gravity.CENTER_VERTICAL);
-        mainLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-        mainLayout.setPadding(dpToPx(context, 12), 0, dpToPx(context, 12), 0);
-
-        ImageView icon = new ImageView(context);
-        LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(dpToPx(context, 35), dpToPx(context, 35));
-        icon.setLayoutParams(iconParams);
         icon.setImageResource(iconResId);
-
-        ImageViewCompat.setImageTintList(icon, ColorStateList.valueOf(Color.parseColor("#7C3AED")));
-
-
-        LinearLayout textLayout = new LinearLayout(context);
-
-        LinearLayout.LayoutParams textLayoutParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
-
-        textLayoutParams.setMarginStart(dpToPx(context, 12));
-        textLayout.setLayoutParams(textLayoutParams);
-        textLayout.setOrientation(LinearLayout.VERTICAL);
-
-
-        TextView idView = new TextView(context);
-
-        idView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         idView.setText(id);
-        idView.setTextColor(Color.parseColor("#F5F5F5"));
-        idView.setTextSize(15);
-        idView.setTypeface(idView.getTypeface(), android.graphics.Typeface.BOLD);
-
-
-        TextView serviceView = new TextView(context);
-
-        serviceView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         serviceView.setText(service_name);
-        serviceView.setTextColor(Color.parseColor("#A1A1AA"));
-        serviceView.setTextSize(12);
-
-
-        TextView dateView = new TextView(context);
-
-        dateView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         dateView.setText(date);
-        dateView.setTextColor(Color.parseColor("#71717A"));
-        dateView.setTextSize(11);
 
-        textLayout.addView(idView);
-        textLayout.addView(serviceView);
-
-        mainLayout.addView(icon);
-        mainLayout.addView(textLayout);
-        mainLayout.addView(dateView);
-
-        // Listener for each card
         card.setOnClickListener(v -> {
             fetchPasswordDetails(identifier);
         });
 
-        card.addView(mainLayout);
-        container.addView(card);
+        container.addView(cardView);
     }
 
 
