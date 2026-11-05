@@ -151,20 +151,24 @@ public class PasswordsFragment extends Fragment {
 
         TextView serviceView = new TextView(context);
         serviceView.setText("Service: " + password.service);
+        serviceView.setTextColor(Color.BLACK);
 
         TextView identifierView = new TextView(context);
         identifierView.setText("Username: " + password.id);
+        identifierView.setTextColor(Color.BLACK);
 
         TextView passwordView = new TextView(context);
         passwordView.setText("Password: " + password.value);
         passwordView.setTextIsSelectable(true);
-        passwordView.setTextColor(Color.WHITE);
+        passwordView.setTextColor(Color.BLUE);
 
         TextView dateView = new TextView(context);
         dateView.setText("Date: " + password.date);
+        dateView.setTextColor(Color.BLACK);
 
         TextView descriptionView = new TextView(context);
         descriptionView.setText("Description: " + password.description);
+        descriptionView.setTextColor(Color.BLACK);
 
         layout.addView(serviceView);
         layout.addView(identifierView);
@@ -172,11 +176,17 @@ public class PasswordsFragment extends Fragment {
         layout.addView(dateView);
         layout.addView(descriptionView);
 
-        new AlertDialog.Builder(context)
-                .setTitle("Password Details")
+        TextView title = new TextView(requireContext());
+        title.setText("Password Details");
+        title.setTextSize(20);
+        title.setTextColor(Color.BLACK);
+        title.setPadding(50, 40, 30, 20);
+
+        AlertDialog dialog =  new AlertDialog.Builder(context)
+                .setCustomTitle(title)
                 .setView(layout)
                 .setPositiveButton("Close", null)
-                .setNegativeButton("Delete", (dialog, which) -> {
+                .setNegativeButton("Delete", (dialogInterface, which) -> {
 
                     new AlertDialog.Builder(context)
                             .setTitle("Delete Password")
@@ -185,7 +195,13 @@ public class PasswordsFragment extends Fragment {
                                 deletePassword(password.identifier);
                             })
                             .setNegativeButton("Cancel", null).show();
-                }).show();
+                }).create();
+
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.home_page_bar);
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#2d6a4f"));
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#b31237"));
+
     }
 
     private void fetchPasswordDetails(String identifier) {
