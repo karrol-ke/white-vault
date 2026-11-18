@@ -4,4 +4,18 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+    <style name="BACKGROUND">
+        <item name="android:background">#121212</item>
+    </style>
+
+    <style name="CARD">
+        <item name="cardBackgroundColor">#121217</item>
+        <item name="strokeColor">#30FFFFFF</item>
+    </style>
+
+    <style name="TEXT">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

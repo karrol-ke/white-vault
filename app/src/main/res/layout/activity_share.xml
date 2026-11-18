@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ShareActivity"
-    android:background="@color/background">
+    style="@style/BACKGROUND">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0000000"
-            android:textColor="@color/lPrimary"
+            android:textColor="@color/primary"
             android:textStyle="bold"
             android:textSize="30sp"
             android:textIsSelectable="true"/>
@@ -36,7 +36,7 @@
             android:id="@+id/button_stop_sharing"
             android:layout_width="200dp"
             android:layout_height="60dp"
-            android:backgroundTint="@color/lPrimary"
+            android:backgroundTint="@color/primary"
             android:text="Stop Sharing"
             android:textColor="@color/black"
             android:textSize="20sp"

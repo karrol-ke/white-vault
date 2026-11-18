@@ -7,17 +7,17 @@
 
     <style name="Theme.WhiteVault" parent="Base.Theme.WhiteVault" />
 
-    <style name="SCREEN">
-        <item name="android:background">@color/primary</item>
-    </style>
-
     <style name="BACKGROUND">
         <item name="android:background">#EBECEF</item>
     </style>
 
     <style name="CARD">
-        <item name="cardBackgroundColor">@color/card</item>
-        <item name="strokeColor">@color/stroke</item>
+        <item name="cardBackgroundColor">#E3D4FF</item>
+        <item name="strokeColor">#30FFFFFF</item>
+    </style>
+
+    <style name="TEXT">
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="ICON">
@@ -26,21 +26,8 @@
         <item name="android:scaleType">centerCrop</item>
     </style>
 
-    <style name="TEXT">
-        <item name="android:textColor">@color/text</item>
-    </style>
-
-    <style name="ADD_BUTTON">
-        <item name="color">@color/primary</item>
-    </style>
-
     <style name="DIALOG">
         <item name="android:background">@color/white</item>
     </style>
 
-    <style name="ITEM_PASSWORD">
-        <item name="cardBackgroundColor">@color/card</item>
-        <item name="tint">@color/primary</item>
-        <item name="android:textColor">@color/text</item>
-    </style>
 </resources>
