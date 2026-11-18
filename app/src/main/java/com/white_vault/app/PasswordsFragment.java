@@ -69,7 +69,6 @@ public class PasswordsFragment extends Fragment {
                 TextView title = new TextView(requireContext());
                 title.setText("Add New Password");
                 title.setTextSize(20);
-                title.setTextColor(Color.BLACK);
                 title.setPadding(50, 40, 30, 20);
 
                 AlertDialog dialog = new AlertDialog.Builder(context)
@@ -105,7 +104,6 @@ public class PasswordsFragment extends Fragment {
 
                 dialog.show();
 
-                dialog.getWindow().setBackgroundDrawableResource(R.drawable.home_page_bar);
                 dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#2d6a4f"));
                 dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#b31237"));
             }
@@ -145,46 +143,28 @@ public class PasswordsFragment extends Fragment {
 
     private void showPasswordDetails(Password password) {
 
-        LinearLayout layout = new LinearLayout(context);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        layout.setPadding(dpToPx(context, 20), 0, dpToPx(context, 20), 0);
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_show_password, null);
 
-        TextView serviceView = new TextView(context);
+        TextView serviceView = dialogView.findViewById(R.id.serviceView);
+        TextView identifierView = dialogView.findViewById(R.id.identifierView);
+        TextView passwordView = dialogView.findViewById(R.id.passwordView);
+        TextView dateView = dialogView.findViewById(R.id.dateView);
+        TextView descriptionView = dialogView.findViewById(R.id.descriptionView);
+
         serviceView.setText("Service: " + password.service);
-        serviceView.setTextColor(Color.BLACK);
-
-        TextView identifierView = new TextView(context);
         identifierView.setText("Username: " + password.id);
-        identifierView.setTextColor(Color.BLACK);
-
-        TextView passwordView = new TextView(context);
         passwordView.setText("Password: " + password.value);
-        passwordView.setTextIsSelectable(true);
-        passwordView.setTextColor(Color.BLUE);
-
-        TextView dateView = new TextView(context);
         dateView.setText("Date: " + password.date);
-        dateView.setTextColor(Color.BLACK);
-
-        TextView descriptionView = new TextView(context);
         descriptionView.setText("Description: " + password.description);
-        descriptionView.setTextColor(Color.BLACK);
-
-        layout.addView(serviceView);
-        layout.addView(identifierView);
-        layout.addView(passwordView);
-        layout.addView(dateView);
-        layout.addView(descriptionView);
 
         TextView title = new TextView(requireContext());
         title.setText("Password Details");
         title.setTextSize(20);
-        title.setTextColor(Color.BLACK);
         title.setPadding(50, 40, 30, 20);
 
         AlertDialog dialog =  new AlertDialog.Builder(context)
                 .setCustomTitle(title)
-                .setView(layout)
+                .setView(dialogView)
                 .setPositiveButton("Close", null)
                 .setNegativeButton("Delete", (dialogInterface, which) -> {
 
@@ -198,7 +178,7 @@ public class PasswordsFragment extends Fragment {
                 }).create();
 
         dialog.show();
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.home_page_bar);
+        //dialog.getWindow().setBackgroundDrawableResource(R.drawable.home_page_bar);
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#2d6a4f"));
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#b31237"));
 
